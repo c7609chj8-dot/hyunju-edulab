@@ -1,9 +1,5 @@
-const programs = [
-  { name: "건설·산업안전", detail: "작업 현장의 위험요인을 찾고 예방 방법을 익힙니다." },
-  { name: "학교안전", detail: "교통안전과 학교생활 속 상황을 역할극과 참여 활동으로 다룹니다." },
-  { name: "환경교육", detail: "탄소중립과 자원순환을 생활 속 실천으로 연결합니다." },
-  { name: "AI 활용교육", detail: "수업 준비와 일상 업무에 적용할 수 있는 AI 활용법을 실습합니다." },
-];
+import Link from "next/link";
+import { programs } from "./programs";
 
 export default function Home() {
   return (
@@ -15,6 +11,7 @@ export default function Home() {
             <h1>현장의 경험을 AI로 연결하고,<br className="desktop-break" /> 교육의 가치를 미래로 확장하다.</h1>
             <p className="hero-description">현주에듀랩은 안전·환경·AI를 주제로 현장에서 적용할 수 있는 교육을 설계합니다.</p>
             <a className="button" href="#programs">교육 분야 보기 <span aria-hidden="true">↓</span></a>
+            <Link className="hero-link" href="/about">강사 소개</Link>
           </div>
           <div className="hero-art" aria-hidden="true">
             <svg viewBox="0 0 420 310" fill="none">
@@ -34,9 +31,9 @@ export default function Home() {
         <p className="eyebrow">PROGRAMS</p>
         <h2>교육 분야</h2>
         <ul className="program-grid">
-          {programs.map(({ name, detail }) => (
-            <li key={name}>
-              <h3>{name}</h3>
+          {programs.map(({ slug, name, detail }) => (
+            <li key={slug}>
+              <h3><Link className="program-link" href={`/education#${slug}`}>{name}</Link></h3>
               <p>{detail}</p>
             </li>
           ))}

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 
 const links = [
-  { href: "/#programs", label: "교육 분야" },
+  { href: "/about", label: "강사 소개" },
+  { href: "/education", label: "교육 프로그램" },
   { href: "/#materials", label: "교육자료" },
 ];
 
