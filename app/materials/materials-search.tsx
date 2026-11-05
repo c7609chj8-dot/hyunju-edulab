@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { materials } from "./catalog";
 
@@ -45,7 +46,7 @@ export default function MaterialsSearch() {
           {results.map(({ slug, title, category, audience, description }) => (
             <li key={slug}>
               <p className="eyebrow">{category} · {audience}</p>
-              <h2>{title}</h2>
+              <h2><Link className="program-link" href={`/materials/${slug}`}>{title}</Link></h2>
               <p>{description}</p>
             </li>
           ))}
