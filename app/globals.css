@@ -63,6 +63,14 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .contact-form button { justify-self: start; cursor: pointer; }
 .contact-status { min-height: 1.65em; color: var(--color-teal); }
 .materials { background: var(--color-surface); }
+.materials-note { max-width: 43rem; padding: .85rem 1rem; border-radius: .5rem; background: var(--color-surface); }
+.materials-search { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem; max-width: 43rem; margin-top: 1.5rem; }
+.materials-search label { grid-column: 1 / -1; font-weight: 700; }
+.materials-search :is(input, button) { min-height: 44px; padding: .5rem .75rem; border: 1px solid #76899a; border-radius: .5rem; }
+.materials-search input { width: 100%; }
+.materials-search button { color: var(--color-navy); font-weight: 700; cursor: pointer; }
+.materials-search button:disabled { opacity: .6; cursor: default; }
+.materials-count { margin-block: 1rem .65rem; }
 .site-footer { border-top: 1px solid #dce6ed; }
 .footer-inner { padding-block: 1.25rem; }
 

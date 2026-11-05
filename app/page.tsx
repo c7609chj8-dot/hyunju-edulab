@@ -46,6 +46,7 @@ export default function Home() {
           <p className="eyebrow">MATERIALS</p>
           <h2>교육자료 공개 준비</h2>
           <p>초등 탄소중립·자원순환과 교통안전 자료를 검토하고 있습니다.</p>
+          <Link className="button section-action" href="/materials">교육자료실 보기</Link>
         </div>
       </section>
     </>

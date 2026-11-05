@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 const links = [
   { href: "/about", label: "강사 소개" },
   { href: "/education", label: "교육 프로그램" },
-  { href: "/#materials", label: "교육자료" },
+  { href: "/materials", label: "교육자료" },
   { href: "/contact", label: "문의" },
 ];
 
