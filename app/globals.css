@@ -23,6 +23,10 @@ body { color: var(--color-ink); background: #fff; font-family: Pretendard, "Noto
 .navigation-toggle[aria-expanded="true"] + .navigation-links { display: grid; }
 .navigation-links a { display: flex; align-items: center; min-height: 44px; padding-inline: .75rem; font-size: .95rem; font-weight: 700; white-space: nowrap; }
 .navigation-links a:hover { text-decoration: underline; text-underline-offset: .25em; }
+@media (max-width: 55.999rem) {
+  .navigation-links { max-height: calc(100dvh - 5rem); overflow-y: auto; }
+  .navigation-links a:focus-visible { outline-offset: -3px; }
+}
 .hero { background: var(--color-navy); color: #fff; }
 .hero-inner { display: grid; gap: 1.5rem; align-items: center; padding-block: clamp(2.75rem, 7vw, 6rem); }
 .eyebrow { color: var(--color-teal); font-size: .86rem; font-weight: 800; letter-spacing: .055em; margin-bottom: .65rem; }

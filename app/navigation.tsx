@@ -20,6 +20,11 @@ export default function Navigation() {
   return (
     <div
       className="site-navigation"
+      onBlur={(event) => {
+        if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) {
+          setOpen(false);
+        }
+      }}
       onKeyDown={(event) => {
         if (event.key === "Escape" && open && toggle.current?.getClientRects().length) {
           setOpen(false);
