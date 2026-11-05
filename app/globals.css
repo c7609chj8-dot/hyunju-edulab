@@ -75,12 +75,12 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .footer-inner { padding-block: 1.25rem; }
 
 @media (min-width: 36rem) {
-  .navigation-toggle { display: none; }
-  .navigation-links, .navigation-toggle[aria-expanded="true"] + .navigation-links { display: flex; position: static; gap: 1.25rem; padding: 0; border: 0; background: transparent; box-shadow: none; }
-  .navigation-links a { padding-inline: 0; }
   .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 56rem) {
+  .navigation-toggle { display: none; }
+  .navigation-links, .navigation-toggle[aria-expanded="true"] + .navigation-links { display: flex; position: static; gap: 1.25rem; padding: 0; border: 0; background: transparent; box-shadow: none; }
+  .navigation-links a { padding-inline: 0; }
   .hero-inner { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
   .desktop-break { display: initial; }
   .program-grid:not(.program-grid-detailed) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
