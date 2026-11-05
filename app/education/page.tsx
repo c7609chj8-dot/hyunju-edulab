@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { programs } from "../programs";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function EducationPage() {
           </li>
         ))}
       </ul>
+      <Link className="button section-action" href="/contact">교육 프로그램 문의</Link>
     </section>
   );
 }

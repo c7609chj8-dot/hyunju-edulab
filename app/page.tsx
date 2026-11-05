@@ -10,7 +10,8 @@ export default function Home() {
             <p className="eyebrow">학교·교육기관·기업을 위한 교육</p>
             <h1>현장의 경험을 AI로 연결하고,<br className="desktop-break" /> 교육의 가치를 미래로 확장하다.</h1>
             <p className="hero-description">현주에듀랩은 안전·환경·AI를 주제로 현장에서 적용할 수 있는 교육을 설계합니다.</p>
-            <a className="button" href="#programs">교육 분야 보기 <span aria-hidden="true">↓</span></a>
+            <Link className="button" href="/contact">강의 문의</Link>
+            <a className="hero-link" href="#programs">교육 분야 보기</a>
             <Link className="hero-link" href="/about">강사 소개</Link>
           </div>
           <div className="hero-art" aria-hidden="true">
