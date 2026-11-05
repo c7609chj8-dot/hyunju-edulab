@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import Navigation from "./navigation";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,10 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <header className="site-header">
           <div className="shell header-inner">
             <Brand />
-            <nav aria-label="주요 메뉴">
-              <Link href="/#programs">교육 분야</Link>
-              <Link href="/#materials">교육자료</Link>
-            </nav>
+            <Navigation />
           </div>
         </header>
         <main id="main" tabIndex={-1}>{children}</main>
