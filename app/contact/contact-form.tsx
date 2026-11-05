@@ -24,6 +24,8 @@ export default function ContactForm() {
         <option value="lecture">강의 의뢰</option>
         <option value="materials">교육자료 제작</option>
         <option value="ai">AI 활용교육</option>
+        <option value="website">홈페이지 제작</option>
+        <option value="automation">업무자동화</option>
         <option value="other">기타</option>
       </select>
       <label htmlFor="inquiry-sender">이름 또는 기관명</label>
