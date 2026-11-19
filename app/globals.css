@@ -63,6 +63,15 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .program-grid { display: grid; gap: .9rem; }
 .program-grid li { border: 1px solid #dce6ed; border-radius: .75rem; padding: 1.1rem; }
 .program-grid h3 { color: var(--color-navy); font-weight: 800; margin-bottom: .35rem; }
+.section-description { max-width: 43rem; margin-bottom: 1.5rem; }
+.program-audience { margin-bottom: .45rem; color: var(--color-teal); font-size: .85rem; font-weight: 700; }
+.home-about { background: var(--color-surface); }
+.home-about-inner { display: grid; gap: 2rem; }
+.home-about-inner > div { max-width: 32rem; }
+.teaching-steps { display: grid; gap: 1rem; list-style: decimal; padding-inline-start: 1.5rem; }
+.teaching-steps li { padding-inline-start: .25rem; }
+.teaching-steps li::marker { color: var(--color-teal); font-weight: 800; }
+.teaching-steps h3 { color: var(--color-navy); font-weight: 800; margin-bottom: .25rem; }
 .program-link { text-decoration: underline; text-underline-offset: .2em; }
 .content-page h1 { color: var(--color-navy); }
 .page-lead { max-width: 43rem; margin-block: 1rem 2rem; font-size: 1.125rem; }
@@ -107,6 +116,7 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
   .footer-links { width: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 56rem) {
+  .home-about-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
   .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .program-grid:not(.program-grid-detailed) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .service-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }

@@ -13,7 +13,7 @@ export default function PortfolioPage() {
       <h1>포트폴리오</h1>
       <p className="page-lead">현주에듀랩이 진행 중인 홈페이지 구축과 교육자료 준비 사례입니다.</p>
       <ul className="program-grid program-grid-detailed">
-        <li>
+        <li id="website">
           <p className="eyebrow">홈페이지 구축</p>
           <h2>현주에듀랩 홈페이지</h2>
           <dl className="program-details">
@@ -26,7 +26,7 @@ export default function PortfolioPage() {
           </dl>
           <Link className="program-link section-action inline-block" href="/education">교육 프로그램 보기</Link>
         </li>
-        <li>
+        <li id="teaching-materials">
           <p className="eyebrow">교육자료 준비</p>
           <h2>초등 환경·교통안전 자료</h2>
           <dl className="program-details">

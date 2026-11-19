@@ -45,16 +45,67 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="programs" className="shell section">
+      <section id="programs" className="shell section" aria-labelledby="programs-title">
         <p className="eyebrow">PROGRAMS</p>
-        <h2>교육 분야</h2>
-        <ul className="program-grid">
-          {programs.map(({ slug, name, detail }) => (
+        <h2 id="programs-title">대상에 맞는 교육을 찾아보세요</h2>
+        <p className="section-description">교육 대상과 활동 예시를 살펴보고 필요한 프로그램을 선택하세요.</p>
+        <ul className="program-grid program-grid-detailed">
+          {programs.map(({ slug, name, detail, audience, activity }) => (
             <li key={slug}>
+              <p className="program-audience">{audience}</p>
               <h3><Link className="program-link" href={`/education#${slug}`}>{name}</Link></h3>
               <p>{detail}</p>
+              <dl className="program-details">
+                <dt>활동 예시</dt>
+                <dd>{activity}</dd>
+              </dl>
             </li>
           ))}
+        </ul>
+      </section>
+
+      <section className="home-about" aria-labelledby="instructor-title">
+        <div className="shell section home-about-inner">
+          <div>
+            <p className="eyebrow">INSTRUCTOR</p>
+            <h2 id="instructor-title">강사와 교육 방식</h2>
+            <p>안전관리와 교육 운영의 현장 경험을 바탕으로, 참여자가 직접 판단하고 연습하는 수업을 구성합니다.</p>
+            <Link className="button section-action" href="/about">강사 소개 보기</Link>
+          </div>
+          <ol className="teaching-steps">
+            <li>
+              <h3>상황을 살펴봅니다</h3>
+              <p>작업 현장, 학교생활, 일상 업무에서 마주치는 상황을 수업의 출발점으로 삼습니다.</p>
+            </li>
+            <li>
+              <h3>직접 판단하고 연습합니다</h3>
+              <p>위험 찾기와 역할극, AI 도구 실습으로 배운 내용을 확인합니다.</p>
+            </li>
+            <li>
+              <h3>생활과 업무에 적용합니다</h3>
+              <p>수업에서 익힌 안전 행동과 자원순환 실천, 문서 작성 방법을 돌아봅니다.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="shell section" aria-labelledby="cases-title">
+        <p className="eyebrow">PROJECTS</p>
+        <h2 id="cases-title">진행 사례</h2>
+        <p className="section-description">교육자료 준비와 홈페이지 구축 과정을 소개합니다.</p>
+        <ul className="program-grid program-grid-detailed">
+          <li>
+            <p className="eyebrow">교육자료 준비</p>
+            <h3>초등 환경·교통안전 자료</h3>
+            <p>자원순환과 교통안전의 학습 목표와 활동 예시를 정리했습니다. 원본 자료는 공개 검토 단계입니다.</p>
+            <Link className="program-link section-action inline-flex min-h-11 items-center" href="/portfolio#teaching-materials">자료 준비 사례 보기</Link>
+          </li>
+          <li>
+            <p className="eyebrow">홈페이지 구축</p>
+            <h3>현주에듀랩 홈페이지</h3>
+            <p>교육 프로그램과 자료 검색, 문의 화면을 연결했습니다. 문의 화면은 입력 형식 확인 단계입니다.</p>
+            <Link className="program-link section-action inline-flex min-h-11 items-center" href="/portfolio#website">홈페이지 구축 사례 보기</Link>
+          </li>
         </ul>
       </section>
 
