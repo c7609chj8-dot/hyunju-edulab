@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import Navigation from "./navigation";
+import { siteLinks } from "./site-links";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,8 +37,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main" tabIndex={-1}>{children}</main>
         <footer className="site-footer">
           <div className="shell footer-inner">
-            <Brand />
-            <p>안전·환경·AI 활용 교육</p>
+            <div>
+              <Brand />
+              <p className="footer-description">학교·교육기관·기업을 위한<br />안전·환경·AI 활용 교육</p>
+            </div>
+            <nav className="footer-links" aria-label="하단 메뉴">
+              {siteLinks.map(({ href, label }) => (
+                <Link key={href} href={href}>{label}</Link>
+              ))}
+            </nav>
           </div>
         </footer>
       </body>

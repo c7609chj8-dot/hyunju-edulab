@@ -1,24 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
-
-const links = [
-  { href: "/about", label: "강사 소개" },
-  { href: "/education", label: "교육 프로그램" },
-  { href: "/materials", label: "교육자료" },
-  { href: "/digital", label: "디지털 서비스" },
-  { href: "/portfolio", label: "포트폴리오" },
-  { href: "/insights", label: "소식·정보" },
-  { href: "/contact", label: "문의" },
-];
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { siteLinks } from "./site-links";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const container = useRef<HTMLDivElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function closeOutside(event: PointerEvent) {
+      if (event.target instanceof Node && !container.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    function closeOnDesktop(event: MediaQueryListEvent) {
+      if (event.matches) setOpen(false);
+    }
+
+    const desktop = window.matchMedia("(min-width: 72rem)");
+    document.addEventListener("pointerdown", closeOutside);
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      desktop.removeEventListener("change", closeOnDesktop);
+    };
+  }, [open]);
 
   return (
     <div
+      ref={container}
       className="site-navigation"
       onBlur={(event) => {
         if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) {
@@ -46,9 +63,21 @@ export default function Navigation() {
         </svg>
       </button>
       <nav id="site-navigation-links" className="navigation-links" aria-label="주요 메뉴">
-        {links.map(({ href, label }) => (
-          <Link key={href} href={href} onNavigate={() => setOpen(false)}>{label}</Link>
-        ))}
+        {siteLinks.map(({ href, label }) => {
+          const currentPage = pathname === href;
+          const currentSection = pathname.startsWith(href + "/");
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={href === "/contact" ? "navigation-contact" : undefined}
+              aria-current={currentPage ? "page" : currentSection ? "location" : undefined}
+              onNavigate={() => setOpen(false)}
+            >
+              {label}
+            </Link>
+          );
+        })}
       </nav>
     </div>
   );
