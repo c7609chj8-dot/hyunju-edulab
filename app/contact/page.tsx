@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import ContactForm from "./contact-form";
 import { programs } from "../programs";
+import { digitalServices } from "../digital/services";
 
 export const metadata: Metadata = {
   title: "문의 | 현주에듀랩",
   description: "현주에듀랩의 강의와 교육자료 제작 문의 화면입니다.",
 };
 
-type ContactPageProps = { searchParams: Promise<{ program?: string | string[] }> };
+type ContactPageProps = { searchParams: Promise<{ program?: string | string[]; service?: string | string[] }> };
 
 export default async function ContactPage({ searchParams }: ContactPageProps) {
-  const { program } = await searchParams;
+  const { program, service } = await searchParams;
   const selectedProgram = typeof program === "string" ? programs.find((item) => item.slug === program) : undefined;
+  const selectedService = !selectedProgram && typeof service === "string" ? digitalServices.find((item) => item.slug === service) : undefined;
   return (
     <section className="shell section content-page">
       <p className="eyebrow">CONTACT</p>
@@ -20,7 +22,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       <p id="contact-preview" className="contact-preview">
         현재는 입력 확인용 화면입니다. 예시 정보를 사용해 주세요. 입력 내용은 전송하거나 저장하지 않습니다.
       </p>
-      <ContactForm key={selectedProgram?.slug ?? "general"} initialProgramSlug={selectedProgram?.slug ?? ""} />
+      <ContactForm key={selectedProgram ? `program-${selectedProgram.slug}` : selectedService ? `service-${selectedService.slug}` : "general"} initialProgramSlug={selectedProgram?.slug ?? ""} initialInquiryType={selectedService?.inquiryType ?? ""} />
     </section>
   );
 }

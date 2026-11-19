@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { programs } from "../programs";
 
-export default function ContactForm({ initialProgramSlug = "" }: { initialProgramSlug?: string }) {
+export default function ContactForm({ initialProgramSlug = "", initialInquiryType = "" }: { initialProgramSlug?: string; initialInquiryType?: string }) {
   const [validated, setValidated] = useState(false);
 
   function validate(event: FormEvent<HTMLFormElement>) {
@@ -25,7 +25,7 @@ export default function ContactForm({ initialProgramSlug = "" }: { initialProgra
         {programs.map(({ slug, name }) => <option key={slug} value={slug}>{name}</option>)}
       </select>
       <label htmlFor="inquiry-type">문의 유형</label>
-      <select id="inquiry-type" defaultValue={initialProgramSlug === "ai" ? "ai" : initialProgramSlug ? "lecture" : ""} required>
+      <select id="inquiry-type" defaultValue={initialInquiryType || (initialProgramSlug === "ai" ? "ai" : initialProgramSlug ? "lecture" : "")} required>
         <option value="" disabled>문의 유형 선택</option>
         <option value="lecture">강의 의뢰</option>
         <option value="materials">교육자료 제작</option>
