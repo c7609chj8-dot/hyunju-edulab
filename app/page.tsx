@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { programs } from "./programs";
 
 export default function Home() {
@@ -14,16 +15,26 @@ export default function Home() {
             <a className="hero-link" href="#programs">교육 분야 보기</a>
             <Link className="hero-link" href="/about">강사 소개</Link>
           </div>
-          <div className="hero-art" aria-hidden="true">
-            <svg viewBox="0 0 420 310" fill="none">
-              <rect x="46" y="35" width="328" height="240" rx="24" fill="#193a53" stroke="#365b70" />
-              <path d="M74 90h272M74 155h272M74 220h272M114 64v182M210 64v182M306 64v182" stroke="#365b70" />
-              <path d="M210 130c-31-23-66-28-100-14v87c34-12 69-7 100 14 31-21 66-26 100-14v-87c-34-14-69-9-100 14Z" fill="#102840" stroke="#ecf6f7" strokeWidth="3" strokeLinejoin="round" />
-              <path d="M210 130v87M134 145c15-3 31 0 48 9m-48 15c15-3 31 0 48 9" stroke="#94abb8" strokeWidth="3" strokeLinecap="round" />
-              <path d="m241 164 12 12 26-30" stroke="#7ee2ca" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="346" cy="90" r="5" fill="#7ee2ca" />
-              <circle cx="74" cy="220" r="5" fill="#7ee2ca" />
-            </svg>
+          <div className="hero-photos">
+            <figure className="hero-photo hero-photo-main">
+              <Image
+                src="/images/school-safety-class.jpg"
+                alt="교실에서 학생들과 함께 진행하는 안전교육 현장"
+                fill
+                sizes="(min-width: 896px) 550px, (min-width: 576px) 85vw, 90vw"
+                preload
+              />
+              <figcaption>학생들과 함께하는 안전교육</figcaption>
+            </figure>
+            <figure className="hero-photo hero-photo-workshop">
+              <Image
+                src="/images/ai-workshop.jpg"
+                alt="참여자들이 노트북으로 실습하는 AI 활용교육 현장"
+                fill
+                sizes="(min-width: 896px) 320px, 58vw"
+              />
+              <figcaption>직접 익히는 AI 활용교육</figcaption>
+            </figure>
           </div>
         </div>
       </section>
