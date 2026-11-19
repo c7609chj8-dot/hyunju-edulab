@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "소식·정보 | 현주에듀랩",
-  description: "현주에듀랩의 홈페이지 구축과 교육자료 안내를 확인하세요.",
-};
+export const metadata = pageMetadata("/insights", "소식·정보 | 현주에듀랩", "현주에듀랩의 홈페이지 구축과 교육자료 안내를 확인하세요.");
 
 export default function InsightsPage() {
   return (

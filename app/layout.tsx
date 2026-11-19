@@ -3,11 +3,15 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import Navigation from "./navigation";
 import { siteLinks } from "./site-links";
+import { productionIndexing, siteName, siteUrl } from "./seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "현주에듀랩 | 안전·환경·AI 교육",
   description: "학교, 교육기관, 기업을 위한 안전·환경·AI 활용 교육",
+  robots: { index: productionIndexing, follow: true },
+  icons: { icon: "/icon.svg" },
 };
 
 function Brand() {
@@ -27,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: siteName, url: siteUrl, inLanguage: "ko-KR" }).replace(/</g, "\\u003c") }} />
         <a className="skip-link" href="#main">본문으로 이동</a>
         <header className="site-header">
           <div className="shell header-inner">

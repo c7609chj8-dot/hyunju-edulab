@@ -2,6 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { programs } from "./programs";
 import { teachingApproach } from "./teaching-approach";
+import { pageMetadata } from "./seo";
+
+export const metadata = pageMetadata("/", "현주에듀랩 | 안전·환경·AI 교육", "학교·교육기관·기업을 위한 안전·환경·AI 활용 교육. 대상에 맞는 프로그램과 강사 소개, 교육자료를 살펴보세요.");
 
 export default function Home() {
   return (

@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import ContactForm from "./contact-form";
 import { programs } from "../programs";
 import { digitalServices } from "../digital/services";
 
-export const metadata: Metadata = {
-  title: "문의 | 현주에듀랩",
-  description: "현주에듀랩의 강의와 교육자료 제작 문의 화면입니다.",
-};
+export const metadata = pageMetadata("/contact", "문의 | 현주에듀랩", "현주에듀랩의 강의와 교육자료 제작 문의 화면입니다.", false);
 
 type ContactPageProps = { searchParams: Promise<{ program?: string | string[]; service?: string | string[] }> };
 

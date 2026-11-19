@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { programs } from "../../programs";
+import { pageMetadata } from "../../seo";
 
 type ProgramPageProps = { params: Promise<{ slug: string }> };
 
@@ -15,7 +16,8 @@ export async function generateMetadata({ params }: ProgramPageProps): Promise<Me
   const { slug } = await params;
   const program = programs.find((item) => item.slug === slug);
   if (!program) notFound();
-  return { title: `${program.name} 교육 | 현주에듀랩`, description: `${program.audience}를 위한 교육입니다. ${program.detail}` };
+  const title = program.name.endsWith("교육") ? program.name : `${program.name} 교육`;
+  return pageMetadata(`/education/${program.slug}`, `${title} | 현주에듀랩`, `${program.audience}를 위한 교육입니다. ${program.detail}`);
 }
 
 export default async function ProgramPage({ params }: ProgramPageProps) {

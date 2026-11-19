@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { materials } from "../catalog";
 import { Suspense } from "react";
 import MaterialsBackLink from "../materials-back-link";
+import { pageMetadata } from "../../seo";
 
 type MaterialPageProps = {
   params: Promise<{ slug: string }>;
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: MaterialPageProps): Promise<M
   const material = materials.find((item) => item.slug === slug);
   if (!material) notFound();
 
-  return {
-    title: `${material.title} | 현주에듀랩`,
-    description: material.description,
-  };
+  return pageMetadata(`/materials/${material.slug}`, `${material.title} | 현주에듀랩`, material.description);
 }
 
 export default async function MaterialPage({ params }: MaterialPageProps) {

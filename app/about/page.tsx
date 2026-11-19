@@ -1,13 +1,10 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import Link from "next/link";
 import Image from "next/image";
 import { programs } from "../programs";
 import { teachingApproach } from "../teaching-approach";
 
-export const metadata: Metadata = {
-  title: "최현주 강사 소개 | 현주에듀랩",
-  description: "최현주 강사의 안전교육 운영 경력과 AI·산업안전 관련 자격, 실습 중심 교육 방식을 소개합니다.",
-};
+export const metadata = pageMetadata("/about", "최현주 강사 소개 | 현주에듀랩", "최현주 강사의 안전교육 운영 경력과 AI·산업안전 관련 자격, 실습 중심 교육 방식을 소개합니다.");
 
 const experience = [
   {

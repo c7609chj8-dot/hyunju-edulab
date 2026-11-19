@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import Link from "next/link";
 import { portfolioCases } from "./cases";
 
-export const metadata: Metadata = {
-  title: "포트폴리오 | 현주에듀랩",
-  description: "현주에듀랩 홈페이지 구축과 초등 교육자료 준비 사례의 작업 내용, 결과와 현재 공개 범위를 소개합니다.",
-};
+export const metadata = pageMetadata("/portfolio", "포트폴리오 | 현주에듀랩", "현주에듀랩 홈페이지 구축과 초등 교육자료 준비 사례의 작업 내용, 결과와 현재 공개 범위를 소개합니다.");
 
 export default function PortfolioPage() {
   return (

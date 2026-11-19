@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import Link from "next/link";
 import { digitalServices } from "./services";
 
-export const metadata: Metadata = {
-  title: "디지털 서비스 | 현주에듀랩",
-  description: "교육기관과 강사를 위한 AI 활용교육, 홈페이지 제작, 업무자동화의 적용 예시를 소개합니다.",
-};
+export const metadata = pageMetadata("/digital", "디지털 서비스 | 현주에듀랩", "교육기관과 강사를 위한 AI 활용교육, 홈페이지 제작, 업무자동화의 적용 예시를 소개합니다.");
 
 export default function DigitalPage() {
   return (

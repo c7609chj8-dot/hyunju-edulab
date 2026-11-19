@@ -166,6 +166,20 @@ npm start
 - Chrome 320·390·768·1024·1280px에서 카드 3개·절차 3단계·FAQ 키보드·관련 교육·사례 링크·서비스 유형 자동 선택·새로고침·잘못된 값·과정 우선순위·입력 미전송·확인 상태 초기화·가로 넘침·브라우저 오류를 확인했다.
 - 모바일·PC 캡처를 확인했다. 실제 모바일 기기·Safari·스크린리더 검수는 미실시다.
 
+## 고도화 10일차 검증 결과
+
+- app/seo.ts에서 운영 기준 주소, 페이지별 canonical·Open Graph·Twitter 카드·검색 정책을 공통 관리한다. 공개 화면 16개의 제목·설명·공유 URL을 각 페이지에 맞게 생성한다.
+- 검색어·분야·서비스 선택 쿼리는 canonical과 공유 URL에서 제외한다. 교육 상세 제목의 중복된 교육 표현을 정리했다.
+- 사이트맵에는 공개 콘텐츠 15개만 포함한다. 입력 확인용 /contact는 noindex, follow로 표시하고 사이트맵에서 제외한다. 갱신일을 임의로 생성하지 않는다.
+- VERCEL_ENV=production에서 검색을 허용한다. preview·development에서는 페이지 noindex, robots 전체 수집 제외, 빈 사이트맵을 생성한다. VERCEL_ENV가 없는 로컬 production 빌드는 운영 정책을 사용한다. 환경변수·외부 서비스 설정은 변경하지 않았다.
+- 검색 정책은 접근 권한 통제가 아니다. 비공개 데이터·인증·관리자 기능은 이번 작업 범위에 포함하지 않는다.
+- 공유 이미지는 기존 교육 현장 JPG를 사용하고 실제 크기를 명시한다. 기존 브랜드 도형의 SVG 아이콘과 이름·URL·언어만 포함한 WebSite 구조화 데이터를 추가했다. 개인정보·미확인 실적은 추가하지 않았다.
+- npm run verify의 린트·프로덕션 빌드·타입 검사를 통과했다.
+- Chrome 390·1280px에서 16개 페이지의 HTTP 200·고유 제목·canonical·공유 정보·JSON-LD·가로 넘침·브라우저 오류를 확인했다. 검색·문의 쿼리의 canonical, 서비스 선택 보존과 404의 noindex·canonical 부재도 확인했다.
+- 운영·Preview·개발 정책 분기를 격리 환경에서 검사했다. 로컬 production 서버의 사이트맵 15개 URL·robots, 공유 수집기 User-Agent 응답의 OG HTML, 공유 이미지·아이콘 HTTP 응답을 검증했다.
+- 실제 검색엔진 색인·순위, 카카오 등 플랫폼의 미리보기 캐시 반영, Search Console 소유권 등록은 이번 검증에 포함하지 않는다.
+- 구현 참조: [Next.js metadata](https://nextjs.org/docs/app/api-reference/functions/generate-metadata), [robots](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots), [sitemap](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap).
+
 ## 운영 반영
 
 - 작업 후 검증을 통과한 변경을 GitHub main에 푸시하고 연결된 Vercel 운영 배포의 커밋·READY·도메인 연결을 확인한다.

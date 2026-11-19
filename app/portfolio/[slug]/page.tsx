@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { portfolioCases } from "../cases";
+import { pageMetadata } from "../../seo";
 
 type CasePageProps = { params: Promise<{ slug: string }> };
 
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   const { slug } = await params;
   const item = portfolioCases.find((entry) => entry.slug === slug);
   if (!item) notFound();
-  return { title: `${item.title} 사례 | 현주에듀랩`, description: item.summary };
+  return pageMetadata(`/portfolio/${item.slug}`, `${item.title} 사례 | 현주에듀랩`, item.summary);
 }
 
 export default async function CasePage({ params }: CasePageProps) {

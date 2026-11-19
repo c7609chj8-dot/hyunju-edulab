@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import MaterialsSearch from "./materials-search";
 import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "교육자료실 | 현주에듀랩",
-  description: "현주에듀랩의 탄소중립·자원순환 및 교통안전 교육자료를 살펴보세요.",
-};
+export const metadata = pageMetadata("/materials", "교육자료실 | 현주에듀랩", "현주에듀랩의 탄소중립·자원순환 및 교통안전 교육자료를 살펴보세요.");
 
 export default function MaterialsPage() {
   return (

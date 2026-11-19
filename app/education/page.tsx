@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../seo";
 import Link from "next/link";
 import { programs } from "../programs";
 
-export const metadata: Metadata = {
-  title: "교육 프로그램 | 현주에듀랩",
-  description: "건설·산업안전, 학교안전, 환경, AI 활용 교육의 대상과 활동 예시를 확인하세요.",
-};
+export const metadata = pageMetadata("/education", "교육 프로그램 | 현주에듀랩", "건설·산업안전, 학교안전, 환경, AI 활용 교육의 대상과 활동 예시를 확인하세요.");
 
 export default function EducationPage() {
   return (
