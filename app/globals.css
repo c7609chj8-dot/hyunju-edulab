@@ -75,6 +75,13 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .program-link { text-decoration: underline; text-underline-offset: .2em; }
 .content-page h1 { color: var(--color-navy); }
 .page-lead { max-width: 43rem; margin-block: 1rem 2rem; font-size: 1.125rem; }
+.about-intro { display: grid; gap: 2rem; align-items: center; }
+.about-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 1rem; background: var(--color-surface); }
+.about-photo img { object-fit: cover; }
+.about-photo figcaption { position: absolute; inset: auto 0 0; padding: 2rem 1rem .75rem; color: white; background: linear-gradient(transparent, #071724e8); font-size: .85rem; }
+.about-section { margin-top: clamp(2.5rem, 6vw, 4rem); }
+.about-section .teaching-steps { max-width: 43rem; }
+.about-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; }
 .content-section { max-width: 43rem; margin-bottom: 2rem; }
 .content-section h2, .program-grid-detailed h2 { font-size: 1.35rem; }
 .topic-list { list-style: disc; padding-inline-start: 1.25rem; }
@@ -116,6 +123,7 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
   .footer-links { width: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 56rem) {
+  .about-intro { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
   .home-about-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
   .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .program-grid:not(.program-grid-detailed) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
