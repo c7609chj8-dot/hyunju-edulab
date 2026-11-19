@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import ContactForm from "./contact-form";
+import { programs } from "../programs";
 
 export const metadata: Metadata = {
   title: "문의 | 현주에듀랩",
   description: "현주에듀랩의 강의와 교육자료 제작 문의 화면입니다.",
 };
 
-export default function ContactPage() {
+type ContactPageProps = { searchParams: Promise<{ program?: string | string[] }> };
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const { program } = await searchParams;
+  const selectedProgram = typeof program === "string" ? programs.find((item) => item.slug === program) : undefined;
   return (
     <section className="shell section content-page">
       <p className="eyebrow">CONTACT</p>
@@ -15,7 +20,7 @@ export default function ContactPage() {
       <p id="contact-preview" className="contact-preview">
         현재는 입력 확인용 화면입니다. 예시 정보를 사용해 주세요. 입력 내용은 전송하거나 저장하지 않습니다.
       </p>
-      <ContactForm />
+      <ContactForm key={selectedProgram?.slug ?? "general"} initialProgramSlug={selectedProgram?.slug ?? ""} />
     </section>
   );
 }

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { programs } from "../programs";
 
-export default function ContactForm() {
+export default function ContactForm({ initialProgramSlug = "" }: { initialProgramSlug?: string }) {
   const [validated, setValidated] = useState(false);
 
   function validate(event: FormEvent<HTMLFormElement>) {
@@ -17,9 +18,14 @@ export default function ContactForm() {
       onSubmit={validate}
       onChange={() => setValidated(false)}
     >
-      <p>모든 항목은 필수입니다.</p>
+      <p>관심 교육 분야를 제외한 모든 항목은 필수입니다.</p>
+      <label htmlFor="inquiry-program">관심 교육 분야 (선택)</label>
+      <select id="inquiry-program" defaultValue={initialProgramSlug}>
+        <option value="">교육 분야 선택 안 함</option>
+        {programs.map(({ slug, name }) => <option key={slug} value={slug}>{name}</option>)}
+      </select>
       <label htmlFor="inquiry-type">문의 유형</label>
-      <select id="inquiry-type" defaultValue="" required>
+      <select id="inquiry-type" defaultValue={initialProgramSlug === "ai" ? "ai" : initialProgramSlug ? "lecture" : ""} required>
         <option value="" disabled>문의 유형 선택</option>
         <option value="lecture">강의 의뢰</option>
         <option value="materials">교육자료 제작</option>

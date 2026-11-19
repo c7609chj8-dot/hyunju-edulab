@@ -24,6 +24,7 @@ export default function EducationPage() {
               <dt>활동 예시</dt>
               <dd>{activity}</dd>
             </dl>
+            <Link className="program-link section-action inline-flex min-h-11 items-center" href={`/education/${slug}`}>{name} 상세 보기</Link>
           </li>
         ))}
       </ul>
