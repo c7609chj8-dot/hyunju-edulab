@@ -5,15 +5,21 @@ import { programs } from "./programs";
 export default function Home() {
   return (
     <>
-      <section className="hero">
+      <section className="hero" aria-labelledby="hero-title">
         <div className="shell hero-inner">
           <div>
             <p className="eyebrow">학교·교육기관·기업을 위한 교육</p>
-            <h1>현장의 경험을 AI로 연결하고,<br className="desktop-break" /> 교육의 가치를 미래로 확장하다.</h1>
-            <p className="hero-description">현주에듀랩은 안전·환경·AI를 주제로 현장에서 적용할 수 있는 교육을 설계합니다.</p>
-            <Link className="button" href="/contact">강의 문의</Link>
-            <a className="hero-link" href="#programs">교육 분야 보기</a>
-            <Link className="hero-link" href="/about">강사 소개</Link>
+            <h1 id="hero-title" className="hero-title">
+              <span>안전·환경·AI,</span>
+              현장에서 익히는 교육
+            </h1>
+            <p className="hero-description">학교 안전부터 자원순환, AI 활용까지.<br />대상과 현장에 맞춰 직접 참여하고 적용하는 교육을 설계합니다.</p>
+            <div className="hero-actions">
+              <Link className="button" href="/contact">강의 의뢰</Link>
+              <Link className="button button-outline" href="/education">교육 프로그램 보기</Link>
+            </div>
+            <Link className="hero-link" href="/about">강사 소개 보기</Link>
+            <p className="hero-slogan">현장의 경험을 AI로 연결하고,<br />교육의 가치를 미래로 확장하다.</p>
           </div>
           <div className="hero-photos">
             <figure className="hero-photo hero-photo-main">
