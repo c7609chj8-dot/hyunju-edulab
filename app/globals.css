@@ -76,6 +76,13 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .content-page h1 { color: var(--color-navy); }
 .page-lead { max-width: 43rem; margin-block: 1rem 2rem; font-size: 1.125rem; }
 .about-intro { display: grid; gap: 2rem; align-items: center; }
+.instructor-name { margin-top: 1rem; color: var(--color-navy); font-size: 1.75rem; font-weight: 800; }
+.instructor-role { margin-top: .25rem; color: var(--color-teal); font-weight: 700; word-break: keep-all; }
+.experience-list { display: grid; gap: 1rem; }
+.experience-list li { padding-block: .5rem 1rem; border-bottom: 1px solid var(--color-border); }
+.experience-list h3 { color: var(--color-navy); font-weight: 800; }
+.qualification-list { display: grid; gap: .65rem; }
+.qualification-list li { padding: .75rem 1rem; border: 1px solid var(--color-border); border-radius: .5rem; }
 .about-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 1rem; background: var(--color-surface); }
 .about-photo img { object-fit: cover; }
 .about-photo figcaption { position: absolute; inset: auto 0 0; padding: 2rem 1rem .75rem; color: white; background: linear-gradient(transparent, #071724e8); font-size: .85rem; }
@@ -90,6 +97,9 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .program-details { margin-top: 1rem; }
 .program-details dt { color: var(--color-navy); font-weight: 700; }
 .program-details dd + dt { margin-top: .65rem; }
+.case-status { margin-block: .65rem; color: var(--color-teal); font-weight: 700; word-break: keep-all; }
+.case-detail .content-section { max-width: 48rem; }
+.case-links { display: grid; gap: .35rem; }
 .section-action { margin-top: 1.5rem; }
 .contact-preview, .contact-form { max-width: 38rem; }
 .contact-preview { padding: .85rem 1rem; border-radius: .5rem; background: var(--color-surface); }
@@ -118,6 +128,7 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .footer-links a:hover { text-decoration: underline; text-underline-offset: .25em; }
 
 @media (min-width: 36rem) {
+  .qualification-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero-actions .button { flex: 0 1 auto; }
   .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-links { width: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); }
