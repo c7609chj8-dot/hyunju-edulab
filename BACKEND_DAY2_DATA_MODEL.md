@@ -20,6 +20,7 @@
 | inquiry_events | 문의 처리·알림 과정의 변경 이력 | 문의 ID, 작업 유형, 이전·이후 상태, 처리자, 시각 |
 | inquiry_notification_attempts | 알림 발송·재시도 상태 | 문의 ID, 고유 발송 키, 시도 횟수, 공급자 상태, 오류 코드 |
 | administrator_roles | 관리자 접근 권한 | 인증 사용자 ID, 역할, 활성 상태, 권한 부여·회수 시각 |
+| administrator_audit_logs | 관리자 민감 작업의 감사 이력 | 처리자, 작업, 대상 식별자, 상태 변경, 시각 |
 
 ## inquiries 설계
 
@@ -84,6 +85,20 @@
 | assigned_at, revoked_at | 시간 | 권한 부여·회수 이력 |
 
 권한 판단에는 사용자가 변경할 수 있는 프로필 정보나 이메일 문자열을 사용하지 않는다. 관리자 역할은 서버와 데이터베이스 권한 정책에서 모두 검사한다.
+
+## administrator_audit_logs 설계
+
+| 필드 | 형식 | 기준 |
+|---|---|---|
+| id | UUID | 내부 기본 키 |
+| actor_user_id | UUID | 인증 서비스의 변경되지 않는 사용자 ID |
+| action | 제한된 값 | inquiry_viewed, assigned, status_changed, purged, role_granted, role_revoked |
+| target_type, target_id | 짧은 텍스트, UUID | 변경·조회한 문의 또는 역할 레코드 식별자 |
+| previous_status, next_status | 제한된 값, 선택 | 상태 변경에만 기록 |
+| request_id | UUID, 선택 | 서버 요청과 연결할 기술 식별자 |
+| created_at | 시간 | 작업 발생 시각 |
+
+감사 이력에는 문의 본문·회신 이메일·세션·권한 부여 사유를 넣지 않는다. 감사 행은 운영자가 일반 처리 화면에서 수정·삭제할 수 없게 한다.
 
 ## 문의 처리 상태
 
