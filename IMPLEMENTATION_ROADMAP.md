@@ -174,3 +174,4 @@
 - [현재 상태](CURRENT_SITE_AUDIT.md)
 - [벤치마킹](BENCHMARK_ANALYSIS.md)
 - [개선 기획](WEBSITE_REDESIGN_PLAN.md)
+- [백엔드 1일차 요구사항 기준](BACKEND_DAY1_REQUIREMENTS.md)
