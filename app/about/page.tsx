@@ -23,6 +23,11 @@ const experience = [
     role: "제조·산업 현장 실무",
     description: "생산·자재·위험물 관리와 안전관리 업무, 위험성평가",
   },
+  {
+    period: "현장 전문 경력",
+    role: "건설안전, 환경기술인",
+    description: "건설·환경 분야 현장 실무 및 기술인 업무",
+  },
 ];
 
 const qualifications = [
