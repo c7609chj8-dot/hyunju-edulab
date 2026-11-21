@@ -19,8 +19,8 @@
 | EMAIL_FROM | 발신자 주소 | 운영 설정 |
 | INQUIRY_NOTIFICATION_TO | 새 문의를 받을 담당자 주소 | 비공개 |
 | INQUIRY_NOTIFICATION_ENABLED | 이메일 알림 전송 허용 여부 | 운영 설정, 기본 false |
-| PRIVACY_POLICY_VERSION | 동의 기록에 저장할 정책 버전 | 운영 설정 |
-| INQUIRY_RETENTION_DAYS | 보유 기간 확정 후 적용할 일수 | 운영 설정 |
+| PRIVACY_POLICY_VERSION | 동의 기록에 저장할 정책 버전 | 운영 설정, 비어 있으면 접수 차단 |
+| INQUIRY_RETENTION_DAYS | 승인된 보유 일수 | 운영 설정, 양의 정수가 아니면 접수 차단 |
 
 모든 비밀값은 `NEXT_PUBLIC_` 접두어를 사용하지 않는다. 브라우저에 전달되는 공개 환경변수에는 데이터베이스 연결 주소, 비밀키, 수신 이메일을 넣지 않는다.
 

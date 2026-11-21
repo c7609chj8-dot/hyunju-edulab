@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateIdempotencyKey } from "../../inquiries/idempotency";
+import { getInquiryRetentionPolicy } from "../../inquiries/retention.server";
 import { validateInquirySubmission } from "../../inquiries/validation";
 
 const responseHeaders = { "Cache-Control": "no-store" };
@@ -17,6 +18,9 @@ function unavailable() {
 
 export async function POST(request: Request) {
   if (process.env.INQUIRY_API_ENABLED !== "true") return unavailable();
+
+  const retentionPolicy = getInquiryRetentionPolicy();
+  if (!retentionPolicy.ready) return unavailable();
 
   const idempotency = validateIdempotencyKey(request.headers.get("idempotency-key"));
   if (!idempotency.valid) {
@@ -49,7 +53,9 @@ export async function POST(request: Request) {
     return json({ error: "invalid_json", message: "요청 형식이 올바르지 않습니다." }, 400);
   }
 
-  const validation = validateInquirySubmission(payload);
+  const validation = validateInquirySubmission(payload, {
+    expectedPrivacyPolicyVersion: retentionPolicy.policy.privacyPolicyVersion,
+  });
   if (!validation.valid) {
     return json({ error: "invalid_inquiry", fields: validation.errors }, 400);
   }

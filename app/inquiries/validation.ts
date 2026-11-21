@@ -18,6 +18,10 @@ export type InquiryValidationResult =
   | { valid: true; data: InquirySubmission }
   | { valid: false; errors: Record<string, string> };
 
+export type InquiryValidationOptions = {
+  expectedPrivacyPolicyVersion?: string;
+};
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -26,7 +30,10 @@ function text(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
-export function validateInquirySubmission(payload: unknown): InquiryValidationResult {
+export function validateInquirySubmission(
+  payload: unknown,
+  options: InquiryValidationOptions = {},
+): InquiryValidationResult {
   if (!isRecord(payload)) return { valid: false, errors: { form: "요청 형식이 올바르지 않습니다." } };
 
   const senderName = text(payload.senderName);
@@ -46,6 +53,12 @@ export function validateInquirySubmission(payload: unknown): InquiryValidationRe
   if (!message || message.length > 2000) errors.message = "문의 내용을 확인해 주세요.";
   if (payload.privacyConsent !== true) errors.privacyConsent = "개인정보 수집·이용 동의가 필요합니다.";
   if (!privacyPolicyVersion || privacyPolicyVersion.length > 64) errors.privacyPolicyVersion = "개인정보 처리 기준을 확인해 주세요.";
+  if (
+    options.expectedPrivacyPolicyVersion
+    && privacyPolicyVersion !== options.expectedPrivacyPolicyVersion
+  ) {
+    errors.privacyPolicyVersion = "최신 개인정보 처리 기준에 동의해 주세요.";
+  }
 
   if (Object.keys(errors).length > 0) return { valid: false, errors };
 
