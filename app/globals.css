@@ -266,3 +266,48 @@ body { color: #142230; background: #f7f8f4; }
   .home-program-card { min-height: 23rem; padding: 1.5rem; }
   .home-resource-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Field gallery: real education moments with progressive visual reveal */
+.field-gallery {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: #e8f3ed;
+}
+.field-gallery-heading { display: grid; gap: 1rem; }
+.field-gallery-heading h2 { margin-bottom: 0; font-size: clamp(1.75rem, 3.6vw, 3rem); }
+.field-gallery-heading > p { max-width: 39rem; color: #456069; word-break: keep-all; }
+.field-gallery-grid { display: grid; gap: .7rem; margin-top: clamp(1.5rem, 4vw, 2.5rem); }
+.field-gallery-card { position: relative; min-height: 15rem; overflow: hidden; background: #102a34; content-visibility: auto; contain-intrinsic-size: 20rem; }
+.field-gallery-card figure { position: absolute; inset: 0; }
+.field-gallery-card img { object-fit: cover; transition: transform .55s cubic-bezier(.2, .75, .2, 1), filter .45s ease; }
+.field-gallery-card::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, #06151a08 20%, #06151ad9 100%); pointer-events: none; transition: background .35s ease; }
+.field-gallery-card figcaption { position: absolute; z-index: 1; inset: auto 1rem 1rem; color: white; }
+.field-gallery-card figcaption p { color: #c5f46a; font-size: .65rem; font-weight: 850; letter-spacing: .12em; line-height: 1.35; }
+.field-gallery-card figcaption h3 { margin-top: .3rem; font-size: clamp(1rem, 2.2vw, 1.3rem); font-weight: 800; line-height: 1.3; letter-spacing: -.035em; word-break: keep-all; }
+.field-gallery-card--profile img { object-position: 50% 40%; }
+.field-gallery-card--feature img { object-position: 50% 50%; }
+.field-gallery-card--wide img { object-position: 50% 50%; }
+@media (hover: hover) and (pointer: fine) {
+  .field-gallery-card:hover img { filter: saturate(1.08) contrast(1.03); transform: scale(1.07); }
+  .field-gallery-card:hover::after { background: linear-gradient(180deg, #06151a10 10%, #06151aea 100%); }
+  .field-gallery-card:hover figcaption h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .26em; }
+}
+@media (min-width: 36rem) {
+  .field-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .field-gallery-card--feature, .field-gallery-card--wide { grid-column: span 2; min-height: 21rem; }
+  .field-gallery-card--profile { min-height: 20rem; }
+}
+@media (min-width: 56rem) {
+  .field-gallery-heading { grid-template-columns: minmax(0, 1fr) minmax(0, .82fr); align-items: end; gap: 3rem; }
+  .field-gallery-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: dense; }
+  .field-gallery-card { grid-column: span 4; min-height: 17rem; }
+  .field-gallery-card--feature { grid-column: span 7; min-height: 30rem; }
+  .field-gallery-card--wide { grid-column: span 5; min-height: 22rem; }
+  .field-gallery-card--profile { grid-column: span 4; min-height: 25rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .field-gallery-grid.is-ready .field-gallery-card { opacity: 0; transform: translateY(1.5rem) scale(.985); }
+  .field-gallery-grid.is-ready .field-gallery-card.is-visible { animation: field-gallery-reveal .7s cubic-bezier(.2, .72, .2, 1) var(--gallery-delay, 0ms) both; }
+  @keyframes field-gallery-reveal {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}

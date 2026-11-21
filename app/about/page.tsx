@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { programs } from "../programs";
 import { teachingApproach } from "../teaching-approach";
+import FieldGallery from "./field-gallery";
 
 export const metadata = pageMetadata("/about", "최현주 강사 소개 | 현주에듀랩", "최현주 강사의 안전교육 운영 경력과 AI·산업안전 관련 자격, 실습 중심 교육 방식을 소개합니다.");
 
@@ -60,6 +61,7 @@ export default function AboutPage() {
           <figcaption>학생들과 함께하는 안전교육</figcaption>
         </figure>
       </div>
+      <FieldGallery />
       <section className="about-section" aria-labelledby="experience-title">
         <p className="eyebrow">EXPERIENCE</p>
         <h2 id="experience-title">주요 경력</h2>
