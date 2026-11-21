@@ -18,6 +18,7 @@
 | EMAIL_API_KEY | 알림 이메일 서비스 비밀키 | 비공개 |
 | EMAIL_FROM | 발신자 주소 | 운영 설정 |
 | INQUIRY_NOTIFICATION_TO | 새 문의를 받을 담당자 주소 | 비공개 |
+| INQUIRY_NOTIFICATION_ENABLED | 이메일 알림 전송 허용 여부 | 운영 설정, 기본 false |
 | PRIVACY_POLICY_VERSION | 동의 기록에 저장할 정책 버전 | 운영 설정 |
 | INQUIRY_RETENTION_DAYS | 보유 기간 확정 후 적용할 일수 | 운영 설정 |
 
@@ -32,6 +33,8 @@
 | production | 승인된 실제 서비스 | 실제 문의 데이터와 최소 권한 계정 |
 
 운영 데이터베이스와 비밀값은 local 또는 preview에 복사하지 않는다. preview에서 실제 이메일 발송이 필요하면 별도의 테스트 수신자만 사용한다.
+
+`INQUIRY_NOTIFICATION_ENABLED`는 DB 저장·수신자·발신 도메인·오류 재시도 절차를 모두 검증하기 전까지 `false`로 둔다. 단순히 이메일 키가 존재하는 것만으로는 전송을 허용하지 않는다.
 
 ## 실제 연결 전 준비 순서
 

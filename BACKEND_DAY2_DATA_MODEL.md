@@ -17,7 +17,8 @@
 | 엔터티 | 목적 | 주요 정보 |
 |---|---|---|
 | inquiries | 방문자 문의의 원본 기록 | 접수 번호, 문의자 정보, 문의 유형, 내용, 동의, 처리 상태 |
-| inquiry_events | 문의 처리 과정의 변경 이력 | 문의 ID, 작업 유형, 이전·이후 상태, 처리자, 시각 |
+| inquiry_events | 문의 처리·알림 과정의 변경 이력 | 문의 ID, 작업 유형, 이전·이후 상태, 처리자, 시각 |
+| inquiry_notification_attempts | 알림 발송·재시도 상태 | 문의 ID, 고유 발송 키, 시도 횟수, 공급자 상태, 오류 코드 |
 | administrator_roles | 관리자 접근 권한 | 인증 사용자 ID, 역할, 활성 상태, 권한 부여·회수 시각 |
 
 ## inquiries 설계
@@ -48,11 +49,29 @@
 | inquiry_id | UUID | inquiries의 내부 키 참조 |
 | actor_type | 제한된 값 | system 또는 administrator |
 | actor_user_id | UUID, 선택 | 관리자 작업이면 인증 사용자 ID 참조 |
-| event_type | 제한된 값 | submitted, status_changed, assigned, purged |
+| event_type | 제한된 값 | submitted, notification_queued, notification_sent, notification_failed, status_changed, assigned, purged |
 | previous_status, next_status | 제한된 값, 선택 | 상태 변경 시에만 기록 |
 | created_at | 시간 | 작업 발생 시각 |
 
 처리 이력에는 문의 본문이나 이메일을 복제하지 않는다. 초기 범위에는 자유 형식 내부 메모를 넣지 않아 개인정보가 불필요하게 늘어나는 것을 막는다.
+
+## inquiry_notification_attempts 설계
+
+| 필드 | 형식 | 기준 |
+|---|---|---|
+| id | UUID | 내부 기본 키 |
+| inquiry_id | UUID | inquiries의 내부 키 참조 |
+| delivery_key | 짧은 텍스트 | 문의·알림 종류별 고유값, 중복 발송 방지 |
+| notification_type | 제한된 값 | 초기 범위에서는 새 문의 관리자 알림만 허용 |
+| provider | 짧은 텍스트 | 승인된 이메일 제공업체 식별값 |
+| status | 제한된 값 | queued, sending, sent, retryable_failed, failed |
+| attempt_count | 정수 | 첫 시도부터 누적, 상한은 운영 정책으로 확정 |
+| provider_message_id | 짧은 텍스트, 선택 | 제공업체가 반환한 발송 식별값 |
+| last_error_code | 짧은 텍스트, 선택 | 오류 유형만 저장하며 원문·개인정보는 저장하지 않음 |
+| next_attempt_at | 시간, 선택 | 재시도가 가능한 다음 시각 |
+| created_at, sent_at, updated_at | 시간 | 생성·성공·최종 변경 시각 |
+
+`delivery_key`에는 `inquiry_id`와 알림 종류를 조합한 서버 생성값을 사용한다. 저장과 알림 대기 등록은 하나의 트랜잭션으로 처리해, 저장은 됐지만 재시도할 알림 기록이 없는 상태를 막는다. 이메일 본문·수신자·API 응답 원문은 이 테이블과 로그에 넣지 않는다.
 
 ## administrator_roles 설계
 

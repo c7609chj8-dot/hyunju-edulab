@@ -178,3 +178,4 @@
 - [백엔드 2일차 데이터 모델 설계](BACKEND_DAY2_DATA_MODEL.md)
 - [백엔드 3일차 환경 설정 기준](BACKEND_DAY3_ENVIRONMENT_SETUP.md)
 - [백엔드 4일차 문의 접수 API 기준](BACKEND_DAY4_INQUIRY_API.md)
+- [백엔드 5일차 이메일 알림 기준](BACKEND_DAY5_EMAIL_NOTIFICATIONS.md)
