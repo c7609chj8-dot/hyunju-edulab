@@ -182,3 +182,4 @@
 - [백엔드 6일차 요청 보호 기준](BACKEND_DAY6_REQUEST_GUARDS.md)
 - [백엔드 7일차 관리자 권한 기준](BACKEND_DAY7_ADMIN_AUTHORIZATION.md)
 - [백엔드 8일차 보유 및 파기 기준](BACKEND_DAY8_RETENTION_AND_PURGE.md)
+- [백엔드 9일차 문의 상태 전이와 감사 이력 기준](BACKEND_DAY9_WORKFLOW_AUDIT.md)
