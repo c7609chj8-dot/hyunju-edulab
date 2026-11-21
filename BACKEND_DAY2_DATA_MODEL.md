@@ -29,7 +29,7 @@
 | sender_name | 짧은 텍스트 | 이름 또는 기관명, 80자 이내 |
 | sender_email | 짧은 텍스트 | 회신용 이메일, 서버 형식 검증 |
 | program_slug | 짧은 텍스트, 선택 | 공개된 교육 과정 식별자만 허용 |
-| inquiry_type | 제한된 값 | 강의·자료·AI·홈페이지·자동화 유형만 허용 |
+| inquiry_type | 제한된 값 | 강의·자료·AI·홈페이지·자동화·기타 유형만 허용 |
 | message | 텍스트 | 문의 내용, 2,000자 이내 |
 | privacy_policy_version | 짧은 텍스트 | 동의한 개인정보 처리 기준의 버전 |
 | privacy_consented_at | 시간 | 동의 시각 |
