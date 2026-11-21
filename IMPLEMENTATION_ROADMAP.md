@@ -175,3 +175,4 @@
 - [벤치마킹](BENCHMARK_ANALYSIS.md)
 - [개선 기획](WEBSITE_REDESIGN_PLAN.md)
 - [백엔드 1일차 요구사항 기준](BACKEND_DAY1_REQUIREMENTS.md)
+- [백엔드 2일차 데이터 모델 설계](BACKEND_DAY2_DATA_MODEL.md)
