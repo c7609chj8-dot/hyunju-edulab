@@ -183,3 +183,4 @@
 - [백엔드 7일차 관리자 권한 기준](BACKEND_DAY7_ADMIN_AUTHORIZATION.md)
 - [백엔드 8일차 보유 및 파기 기준](BACKEND_DAY8_RETENTION_AND_PURGE.md)
 - [백엔드 9일차 문의 상태 전이와 감사 이력 기준](BACKEND_DAY9_WORKFLOW_AUDIT.md)
+- [백엔드 10일차 문의 저장 트랜잭션 기준](BACKEND_DAY10_PERSISTENCE_TRANSACTION.md)
