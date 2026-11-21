@@ -18,9 +18,9 @@ function Brand() {
   return (
     <Link href="/" className="brand" aria-label="현주에듀랩 홈">
       <svg aria-hidden="true" width="42" height="42" viewBox="0 0 42 42">
-        <rect width="42" height="42" rx="12" fill="#102840" />
-        <path d="M21 14c-4-3-8-3-12-2v17c4-1 8-1 12 2 4-3 8-3 12-2V12c-4-1-8-1-12 2v17" fill="none" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="m24 21 2 2 4-5" fill="none" stroke="#7ee2ca" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+        <rect width="42" height="42" rx="12" fill="#7ee2ca" />
+        <path d="M21 14c-4-3-8-3-12-2v17c4-1 8-1 12 2 4-3 8-3 12-2V12c-4-1-8-1-12 2v17" fill="none" stroke="#081924" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="m24 21 2 2 4-5" fill="none" stroke="#087f76" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span>현주에듀랩 <small>HYUNJU EDU LAB</small></span>
     </Link>

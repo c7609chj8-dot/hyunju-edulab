@@ -1,120 +1,169 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { digitalServices } from "./digital/services";
 import { programs } from "./programs";
-import { teachingApproach } from "./teaching-approach";
 import { pageMetadata } from "./seo";
+import { teachingApproach } from "./teaching-approach";
 
-export const metadata = pageMetadata("/", "현주에듀랩 | 안전·환경·AI 교육", "학교·교육기관·기업을 위한 안전·환경·AI 활용 교육. 대상에 맞는 프로그램과 강사 소개, 교육자료를 살펴보세요.");
+export const metadata = pageMetadata("/", "현주에듀랩 | 안전·환경·AI 교육", "학교·교육기관·기업을 위한 안전·환경·AI 활용 교육. 현장에 바로 연결되는 참여형 교육을 설계합니다.");
+
+const learningPrinciples = [
+  "안전·환경·AI를 한 흐름으로 연결",
+  "대상과 현장에 맞춘 참여형 수업 설계",
+  "배운 내용을 바로 적용할 수 있는 활동 구성",
+];
 
 export default function Home() {
   return (
-    <>
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="shell hero-inner">
-          <div>
-            <p className="eyebrow">학교·교육기관·기업을 위한 교육</p>
-            <h1 id="hero-title" className="hero-title">
-              <span>안전·환경·AI,</span>
-              현장에서 익히는 교육
-            </h1>
-            <p className="hero-description">학교 안전부터 자원순환, AI 활용까지.<br />대상과 현장에 맞춰 직접 참여하고 적용하는 교육을 설계합니다.</p>
-            <div className="hero-actions">
-              <Link className="button" href="/contact">강의 의뢰</Link>
-              <Link className="button button-outline" href="/education">교육 프로그램 보기</Link>
-            </div>
-            <Link className="hero-link" href="/about">강사 소개 보기</Link>
-            <p className="hero-slogan">현장의 경험을 AI로 연결하고,<br />교육의 가치를 미래로 확장하다.</p>
+    <div className="home-page">
+      <section className="home-hero" aria-labelledby="hero-title">
+        <Image
+          className="home-hero-image"
+          src="/images/school-safety-class.jpg"
+          alt="교실에서 학생들과 함께 진행하는 안전교육 현장"
+          fill
+          preload
+          sizes="100vw"
+        />
+        <div className="home-hero-scrim" />
+        <div className="shell home-hero-content">
+          <p className="home-kicker">HYUNJU EDU LAB · FIELD LEARNING</p>
+          <h1 id="hero-title">
+            현장의 질문을,
+            <span>오늘의 배움으로 연결합니다.</span>
+          </h1>
+          <p className="home-hero-copy">
+            안전·환경·AI를 주제로 학교와 교육기관, 기업의 상황에 맞는
+            참여형 교육을 설계합니다.
+          </p>
+          <div className="home-hero-actions">
+            <Link className="home-primary-button" href="/contact">강의 의뢰하기 <span aria-hidden="true">→</span></Link>
+            <Link className="home-text-link" href="/education">교육 프로그램 보기 <span aria-hidden="true">↗</span></Link>
           </div>
-          <div className="hero-photos">
-            <figure className="hero-photo hero-photo-main">
-              <Image
-                src="/images/school-safety-class.jpg"
-                alt="교실에서 학생들과 함께 진행하는 안전교육 현장"
-                fill
-                sizes="(min-width: 896px) 550px, (min-width: 576px) 85vw, 90vw"
-                preload
-              />
-              <figcaption>학생들과 함께하는 안전교육</figcaption>
-            </figure>
-            <figure className="hero-photo hero-photo-workshop">
-              <Image
-                src="/images/ai-workshop.jpg"
-                alt="참여자들이 노트북으로 실습하는 AI 활용교육 현장"
-                fill
-                sizes="(min-width: 896px) 320px, 58vw"
-              />
-              <figcaption>직접 익히는 AI 활용교육</figcaption>
-            </figure>
-          </div>
+          <p className="home-hero-caption">현장의 경험을 AI로 연결하고, 교육의 가치를 미래로 확장합니다.</p>
         </div>
       </section>
 
-      <section id="programs" className="shell section" aria-labelledby="programs-title">
-        <p className="eyebrow">PROGRAMS</p>
-        <h2 id="programs-title">대상에 맞는 교육을 찾아보세요</h2>
-        <p className="section-description">교육 대상과 활동 예시를 살펴보고 필요한 프로그램을 선택하세요.</p>
-        <ul className="program-grid program-grid-detailed">
-          {programs.map(({ slug, name, detail, audience, activity }) => (
-            <li key={slug}>
-              <p className="program-audience">{audience}</p>
-              <h3><Link className="program-link" href={`/education#${slug}`}>{name}</Link></h3>
-              <p>{detail}</p>
-              <dl className="program-details">
-                <dt>활동 예시</dt>
-                <dd>{activity}</dd>
-              </dl>
-            </li>
-          ))}
-        </ul>
+      <section className="home-principles" aria-label="현주에듀랩 교육 원칙">
+        <div className="shell home-principles-inner">
+          <p>LEARNING WITH PURPOSE</p>
+          <ul>
+            {learningPrinciples.map((principle, index) => (
+              <li key={principle}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {principle}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      <section className="home-about" aria-labelledby="instructor-title">
-        <div className="shell section home-about-inner">
-          <div>
-            <p className="eyebrow">INSTRUCTOR</p>
-            <h2 id="instructor-title">강사와 교육 방식</h2>
-            <p>안전관리와 교육 운영의 현장 경험을 바탕으로, 참여자가 직접 판단하고 연습하는 수업을 구성합니다.</p>
-            <Link className="button section-action" href="/about">강사 소개 보기</Link>
+      <section id="programs" className="home-programs section" aria-labelledby="programs-title">
+        <div className="shell">
+          <div className="home-section-heading">
+            <p className="home-kicker">EDUCATION PROGRAMS</p>
+            <h2 id="programs-title">대상에 맞는 주제를<br />현장 언어로 풀어냅니다.</h2>
+            <p>교육의 목표와 참여자의 상황을 먼저 살피고, 실제 행동으로 이어지는 활동을 구성합니다.</p>
           </div>
-          <ol className="teaching-steps">
-            {teachingApproach.map(({ title, description }) => (
+          <ul className="home-program-grid">
+            {programs.map(({ slug, name, detail, audience, activity }, index) => (
+              <li key={slug}>
+                <Link href={`/education/${slug}`} className="home-program-card">
+                  <span className="home-card-number">{String(index + 1).padStart(2, "0")}</span>
+                  <p className="home-card-audience">{audience}</p>
+                  <h3>{name}</h3>
+                  <p>{detail}</p>
+                  <span className="home-card-activity">{activity}</span>
+                  <span className="home-card-arrow" aria-hidden="true">→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link className="home-outline-button" href="/education">교육 프로그램 전체 보기 <span aria-hidden="true">→</span></Link>
+        </div>
+      </section>
+
+      <section className="home-learning-lab" aria-labelledby="learning-lab-title">
+        <div className="shell home-learning-lab-inner">
+          <div className="home-learning-lab-copy">
+            <p className="home-kicker">LEARNING LAB</p>
+            <h2 id="learning-lab-title">배움이 끝난 뒤,<br />현장에서 바로 쓸 수 있도록.</h2>
+            <p>강의실 안의 이해가 실제 생활과 업무의 판단으로 이어지도록, 관찰·토의·실습의 순서를 설계합니다.</p>
+            <Link className="home-dark-link" href="/about">강사와 교육 방식 보기 <span aria-hidden="true">→</span></Link>
+          </div>
+          <ol className="home-approach-list">
+            {teachingApproach.map(({ title, description }, index) => (
               <li key={title}>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="shell section" aria-labelledby="cases-title">
-        <p className="eyebrow">PROJECTS</p>
-        <h2 id="cases-title">진행 사례</h2>
-        <p className="section-description">교육자료 준비와 홈페이지 구축 과정을 소개합니다.</p>
-        <ul className="program-grid program-grid-detailed">
-          <li>
-            <p className="eyebrow">교육자료 준비</p>
-            <h3>초등 환경·교통안전 자료</h3>
-            <p>자원순환과 교통안전의 학습 목표와 활동 예시를 정리했습니다. 원본 자료는 공개 검토 단계입니다.</p>
-            <Link className="program-link section-action inline-flex min-h-11 items-center" href="/portfolio#teaching-materials">자료 준비 사례 보기</Link>
-          </li>
-          <li>
-            <p className="eyebrow">홈페이지 구축</p>
-            <h3>현주에듀랩 홈페이지</h3>
-            <p>교육 프로그램과 자료 검색, 문의 화면을 연결했습니다. 문의 화면은 입력 형식 확인 단계입니다.</p>
-            <Link className="program-link section-action inline-flex min-h-11 items-center" href="/portfolio#website">홈페이지 구축 사례 보기</Link>
-          </li>
-        </ul>
-      </section>
-
-      <section id="materials" className="materials">
-        <div className="shell section">
-          <p className="eyebrow">MATERIALS</p>
-          <h2>교육자료 공개 준비</h2>
-          <p>초등 탄소중립·자원순환과 교통안전 자료를 검토하고 있습니다.</p>
-          <Link className="button section-action" href="/materials">교육자료실 보기</Link>
+      <section className="home-studio section" aria-labelledby="studio-title">
+        <div className="shell home-studio-grid">
+          <figure className="home-studio-image">
+            <Image
+              src="/images/ai-workshop.jpg"
+              alt="참여자들이 노트북으로 실습하는 AI 활용교육 현장"
+              fill
+              sizes="(min-width: 960px) 50vw, 100vw"
+            />
+            <figcaption>직접 해보며 익히는 AI 활용교육</figcaption>
+          </figure>
+          <div className="home-studio-copy">
+            <p className="home-kicker">DIGITAL PRACTICE</p>
+            <h2 id="studio-title">교육의 경험을<br />디지털 도구로 넓힙니다.</h2>
+            <p>수업 준비, 자료 구성, 반복되는 교육 업무까지. 필요한 범위를 함께 확인하고 적용 가능한 방식부터 제안합니다.</p>
+            <div className="home-studio-links">
+              {digitalServices.map(({ slug, title, description }) => (
+                <Link key={slug} href="/digital">
+                  <span>{title}</span>
+                  <small>{description}</small>
+                  <b aria-hidden="true">↗</b>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
-    </>
+
+      <section className="home-resources" aria-labelledby="resources-title">
+        <div className="shell home-resources-inner">
+          <div>
+            <p className="home-kicker">OPEN RESOURCES</p>
+            <h2 id="resources-title">수업을 준비하는<br />과정도 함께 나눕니다.</h2>
+          </div>
+          <div className="home-resource-cards">
+            <Link href="/materials" className="home-resource-card">
+              <span>01</span>
+              <h3>교육자료실</h3>
+              <p>탄소중립·자원순환과 교통안전 자료의 학습 목표와 활동 예시를 살펴보세요.</p>
+              <b aria-hidden="true">→</b>
+            </Link>
+            <Link href="/portfolio" className="home-resource-card">
+              <span>02</span>
+              <h3>진행 사례</h3>
+              <p>교육자료와 홈페이지를 준비하며 검토하고 있는 과정을 투명하게 소개합니다.</p>
+              <b aria-hidden="true">→</b>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-contact-cta" aria-labelledby="contact-cta-title">
+        <div className="shell">
+          <p className="home-kicker">LET&apos;S TALK</p>
+          <h2 id="contact-cta-title">다음 교육의 시작을<br />함께 준비해 보세요.</h2>
+          <p>교육 대상과 주제, 희망하는 활동을 알려주시면 수업 방식과 준비 사항을 함께 살펴보겠습니다.</p>
+          <Link className="home-primary-button" href="/contact">강의 의뢰하기 <span aria-hidden="true">→</span></Link>
+        </div>
+      </section>
+    </div>
   );
 }
