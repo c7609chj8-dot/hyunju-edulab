@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { validateIdempotencyKey } from "../../inquiries/idempotency";
 import { validateInquirySubmission } from "../../inquiries/validation";
 
 const responseHeaders = { "Cache-Control": "no-store" };
@@ -16,6 +17,18 @@ function unavailable() {
 
 export async function POST(request: Request) {
   if (process.env.INQUIRY_API_ENABLED !== "true") return unavailable();
+
+  const idempotency = validateIdempotencyKey(request.headers.get("idempotency-key"));
+  if (!idempotency.valid) {
+    return json(
+      {
+        error: "invalid_idempotency_key",
+        field: "idempotencyKey",
+        message: idempotency.message,
+      },
+      400,
+    );
+  }
 
   const contentType = request.headers.get("content-type") ?? "";
   if (!contentType.startsWith("application/json")) {

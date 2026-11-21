@@ -179,3 +179,4 @@
 - [백엔드 3일차 환경 설정 기준](BACKEND_DAY3_ENVIRONMENT_SETUP.md)
 - [백엔드 4일차 문의 접수 API 기준](BACKEND_DAY4_INQUIRY_API.md)
 - [백엔드 5일차 이메일 알림 기준](BACKEND_DAY5_EMAIL_NOTIFICATIONS.md)
+- [백엔드 6일차 요청 보호 기준](BACKEND_DAY6_REQUEST_GUARDS.md)
