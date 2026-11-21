@@ -132,6 +132,13 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .footer-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1.5rem; width: 100%; }
 .footer-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: .95rem; }
 .footer-links a:hover { text-decoration: underline; text-underline-offset: .25em; }
+.footer-qr { display: flex; align-items: center; gap: .85rem; max-width: 20rem; }
+.footer-qr-code { flex: 0 0 5.75rem; width: 5.75rem; padding: .35rem; border-radius: .45rem; background: white; line-height: 0; }
+.footer-qr-code svg { display: block; width: 100%; height: auto; }
+.footer-qr p { margin: 0; }
+.footer-qr-label { color: var(--color-action); font-size: .65rem; font-weight: 850; letter-spacing: .12em; }
+.footer-qr-copy { margin-top: .3rem !important; color: #c2d4d9; font-size: .82rem; line-height: 1.45; word-break: keep-all; }
+.footer-qr-link { display: inline-flex; align-items: center; min-height: 2.25rem; margin-top: .25rem; color: white; font-size: .86rem; font-weight: 750; text-decoration: underline; text-underline-offset: .25em; }
 
 @media (min-width: 36rem) {
   .qualification-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }

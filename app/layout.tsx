@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import Navigation from "./navigation";
+import InquiryQrCode from "./inquiry-qr-code";
 import { siteLinks } from "./site-links";
 import { productionIndexing, siteName, siteUrl } from "./seo";
 import "./globals.css";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Link key={href} href={href}>{label}</Link>
               ))}
             </nav>
+            <InquiryQrCode />
           </div>
         </footer>
       </body>
