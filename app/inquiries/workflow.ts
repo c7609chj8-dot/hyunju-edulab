@@ -1,6 +1,6 @@
 import type { InquiryAdministrationAccess } from "./admin-authorization";
 
-export const inquiryStatusValues = ["new", "in_progress", "on_hold", "completed", "closed"] as const;
+export const inquiryStatusValues = ["received", "reviewing", "answered"] as const;
 
 export type InquiryStatus = (typeof inquiryStatusValues)[number];
 
@@ -8,11 +8,15 @@ const inquiryStatusSet = new Set<InquiryStatus>(inquiryStatusValues);
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
 
 const allowedNextStatuses: Record<InquiryStatus, readonly InquiryStatus[]> = {
-  new: ["in_progress", "on_hold", "completed", "closed"],
-  in_progress: ["on_hold", "completed", "closed"],
-  on_hold: ["in_progress", "completed", "closed"],
-  completed: [],
-  closed: [],
+  received: ["reviewing"],
+  reviewing: ["answered"],
+  answered: [],
+};
+
+export const inquiryStatusLabels: Record<InquiryStatus, string> = {
+  received: "접수",
+  reviewing: "확인 중",
+  answered: "답변 완료",
 };
 
 export type InquiryStatusTransition = {

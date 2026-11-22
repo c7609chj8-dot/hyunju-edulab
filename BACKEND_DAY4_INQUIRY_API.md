@@ -1,5 +1,7 @@
 # 백엔드 4일차 문의 접수 API 기준
 
+> 2026-11-22 업데이트: 현재 API는 실제 Supabase 저장 경로까지 구현됐지만 `INQUIRY_API_ENABLED=false`로 계속 차단된다. 최신 운영·검증 기준은 [BACKEND_PHASE1_SUPABASE.md](BACKEND_PHASE1_SUPABASE.md)를 따른다.
+
 ## 목적
 
 문의 접수에 필요한 서버 검증 계약과 스팸 방지의 최소 기준을 추가한다. 실제 문의 저장과 이메일 발송은 데이터베이스·알림 서비스·개인정보 처리 기준이 확정된 뒤에만 활성화한다.

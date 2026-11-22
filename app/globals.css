@@ -116,6 +116,19 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .contact-confirmation input { flex: 0 0 auto; width: 1rem; height: 1rem; accent-color: var(--color-teal); }
 .contact-form button { justify-self: start; cursor: pointer; }
 .contact-status { min-height: 1.65em; color: var(--color-teal); }
+.admin-page { max-width: 68rem; }
+.admin-help { max-width: 48rem; margin-bottom: 1.25rem; color: #52636d; }
+.admin-inquiry-list { display: grid; gap: 1rem; }
+.admin-inquiry-card { padding: 1.15rem; border: 1px solid var(--color-border); border-radius: .75rem; background: white; }
+.admin-inquiry-heading { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: .75rem; }
+.admin-inquiry-heading h2 { margin: 0; font-size: 1.35rem; }
+.admin-inquiry-heading time { color: #52636d; font-size: .875rem; }
+.admin-inquiry-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .75rem 1.25rem; margin-top: 1rem; }
+.admin-inquiry-details dt { color: #52636d; font-size: .8rem; font-weight: 700; }
+.admin-inquiry-details dd { margin-top: .15rem; overflow-wrap: anywhere; }
+.admin-inquiry-message { margin-top: 1rem; padding: .85rem; border-radius: .5rem; background: var(--color-surface); white-space: pre-wrap; overflow-wrap: anywhere; }
+.admin-status-control { display: grid; gap: .35rem; width: min(16rem, 100%); margin-top: 1rem; font-weight: 700; }
+.admin-status-control select { min-height: 44px; padding: .55rem .75rem; border: 1px solid #76899a; border-radius: .5rem; background: white; }
 .materials { background: var(--color-surface); }
 .materials-note { max-width: 43rem; padding: .85rem 1rem; border-radius: .5rem; background: var(--color-surface); }
 .materials-search { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem; max-width: 43rem; margin-top: 1.5rem; }

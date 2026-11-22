@@ -6,6 +6,13 @@ import { programs } from "../programs";
 
 export default function ContactForm({ initialProgramSlug = "", initialInquiryType = "" }: { initialProgramSlug?: string; initialInquiryType?: string }) {
   const [validated, setValidated] = useState(false);
+  const initialType = inquiryTypeOptions.some(({ value }) => value === initialInquiryType)
+    ? initialInquiryType
+    : initialProgramSlug === "ai"
+      ? "ai"
+      : initialProgramSlug
+        ? "safety"
+        : "";
 
   function validate(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -19,7 +26,7 @@ export default function ContactForm({ initialProgramSlug = "", initialInquiryTyp
       onSubmit={validate}
       onChange={() => setValidated(false)}
     >
-      <p>관심 교육 분야를 제외한 모든 항목은 필수입니다.</p>
+      <p>이메일과 관심 교육 분야를 제외한 모든 항목은 필수입니다.</p>
       <div className="inquiry-honeypot" aria-hidden="true">
         <label htmlFor="inquiry-website">홈페이지</label>
         <input id="inquiry-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
@@ -29,15 +36,17 @@ export default function ContactForm({ initialProgramSlug = "", initialInquiryTyp
         <option value="">교육 분야 선택 안 함</option>
         {programs.map(({ slug, name }) => <option key={slug} value={slug}>{name}</option>)}
       </select>
-      <label htmlFor="inquiry-type">문의 유형</label>
-      <select id="inquiry-type" name="inquiryType" defaultValue={initialInquiryType || (initialProgramSlug === "ai" ? "ai" : initialProgramSlug ? "lecture" : "")} required>
-        <option value="" disabled>문의 유형 선택</option>
+      <label htmlFor="inquiry-type">문의 분야</label>
+      <select id="inquiry-type" name="inquiryType" defaultValue={initialType} required>
+        <option value="" disabled>문의 분야 선택</option>
         {inquiryTypeOptions.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
       </select>
-      <label htmlFor="inquiry-sender">이름 또는 기관명</label>
+      <label htmlFor="inquiry-sender">이름</label>
       <input id="inquiry-sender" name="senderName" required pattern=".*\S.*" maxLength={80} />
-      <label htmlFor="inquiry-email">회신 이메일</label>
-      <input id="inquiry-email" name="senderEmail" type="email" placeholder="sample@example.com" maxLength={254} required />
+      <label htmlFor="inquiry-contact">연락처</label>
+      <input id="inquiry-contact" name="senderContact" type="tel" placeholder="010-1234-5678" maxLength={50} required />
+      <label htmlFor="inquiry-email">이메일 (선택)</label>
+      <input id="inquiry-email" name="senderEmail" type="email" placeholder="sample@example.com" maxLength={254} />
       <label htmlFor="inquiry-message">문의 내용</label>
       <textarea
         id="inquiry-message"
@@ -52,8 +61,8 @@ export default function ContactForm({ initialProgramSlug = "", initialInquiryTyp
         }}
       />
       <label className="contact-confirmation">
-        <input name="acknowledgedPreview" type="checkbox" required />
-        입력 확인용 화면이라는 안내를 확인했습니다.
+        <input name="privacyConsent" type="checkbox" required />
+        개인정보 수집·이용에 동의합니다. 개인정보 보유 기간은 최종 확정 전의 임시 정책입니다.
       </label>
       <button className="button" type="submit">입력 확인</button>
       <p className="contact-status" role="status">

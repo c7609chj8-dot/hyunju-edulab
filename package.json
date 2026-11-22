@@ -11,6 +11,8 @@
     "verify": "npm run lint && npm run build && npm run typecheck"
   },
   "dependencies": {
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.2",
     "next": "^16.0.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.0",

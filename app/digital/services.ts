@@ -14,7 +14,7 @@ export const digitalServices = [
   },
   {
     slug: "website",
-    inquiryType: "website",
+    inquiryType: "collaboration",
     title: "홈페이지 제작",
     audience: "기관 소개와 교육 안내를 정리하려는 교육기관·강사",
     description: "기관 정보와 교육 프로그램을 정리하고 방문자가 필요한 안내를 쉽게 찾도록 구성합니다.",
@@ -27,7 +27,7 @@ export const digitalServices = [
   },
   {
     slug: "automation",
-    inquiryType: "automation",
+    inquiryType: "collaboration",
     title: "교육기관 업무자동화",
     audience: "신청 정리·일정 안내·보고서 작성이 반복되는 교육 담당자",
     description: "현재 업무 흐름을 살펴보고 자동화할 단계와 담당자가 확인할 단계를 구분합니다.",

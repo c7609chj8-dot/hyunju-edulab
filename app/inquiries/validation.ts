@@ -3,12 +3,14 @@ import { inquiryTypeValues, type InquiryType } from "./contract";
 
 const programSlugs = new Set(programs.map(({ slug }) => slug));
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
+const contactPattern = /^[0-9+().\-\s]{7,50}$/u;
 
 export type InquirySubmission = {
   programSlug: string | null;
   inquiryType: InquiryType;
   senderName: string;
-  senderEmail: string;
+  senderContact: string;
+  senderEmail: string | null;
   message: string;
   privacyPolicyVersion: string;
   privacyConsentedAt: string;
@@ -37,6 +39,7 @@ export function validateInquirySubmission(
   if (!isRecord(payload)) return { valid: false, errors: { form: "요청 형식이 올바르지 않습니다." } };
 
   const senderName = text(payload.senderName);
+  const senderContact = text(payload.senderContact);
   const senderEmail = text(payload.senderEmail);
   const programSlug = text(payload.programSlug);
   const inquiryType = text(payload.inquiryType);
@@ -46,8 +49,11 @@ export function validateInquirySubmission(
   const errors: Record<string, string> = {};
 
   if (website) errors.form = "요청을 처리할 수 없습니다.";
-  if (!senderName || senderName.length > 80) errors.senderName = "이름 또는 기관명을 확인해 주세요.";
-  if (!senderEmail || senderEmail.length > 254 || !emailPattern.test(senderEmail)) errors.senderEmail = "회신 이메일을 확인해 주세요.";
+  if (!senderName || senderName.length > 80) errors.senderName = "이름을 확인해 주세요.";
+  if (!senderContact || !contactPattern.test(senderContact)) errors.senderContact = "연락처를 확인해 주세요.";
+  if (senderEmail && (senderEmail.length > 254 || !emailPattern.test(senderEmail))) {
+    errors.senderEmail = "이메일을 확인해 주세요.";
+  }
   if (programSlug && !programSlugs.has(programSlug)) errors.programSlug = "관심 교육 분야를 확인해 주세요.";
   if (!inquiryTypeValues.has(inquiryType as InquiryType)) errors.inquiryType = "문의 유형을 확인해 주세요.";
   if (!message || message.length > 2000) errors.message = "문의 내용을 확인해 주세요.";
@@ -68,7 +74,8 @@ export function validateInquirySubmission(
       programSlug: programSlug || null,
       inquiryType: inquiryType as InquiryType,
       senderName,
-      senderEmail,
+      senderContact,
+      senderEmail: senderEmail || null,
       message,
       privacyPolicyVersion,
       privacyConsentedAt: new Date().toISOString(),

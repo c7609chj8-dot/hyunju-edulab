@@ -4,7 +4,6 @@ import type { InquirySubmission } from "./validation";
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
 const inquiryNumberPattern = /^HJ-[A-HJ-NP-Z2-9]{12}$/u;
 const sha256HexPattern = /^[0-9a-f]{64}$/iu;
-const providerPattern = /^[a-z0-9][a-z0-9_-]{0,63}$/iu;
 
 function text(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -23,11 +22,6 @@ function parseInquiryNumber(value: unknown) {
 function parseSha256Hash(value: unknown) {
   const candidate = text(value);
   return sha256HexPattern.test(candidate) ? candidate.toLowerCase() : null;
-}
-
-function parseNotificationProvider(value: unknown) {
-  const candidate = text(value);
-  return providerPattern.test(candidate) ? candidate.toLowerCase() : null;
 }
 
 function isValidRetentionPolicy(policy: unknown): policy is InquiryRetentionPolicy {
@@ -53,7 +47,6 @@ export type NewInquiryPersistenceInput = {
   requestFingerprint: unknown;
   receivedAt: Date;
   retentionPolicy: InquiryRetentionPolicy;
-  notificationProvider?: unknown;
 };
 
 export type NewInquiryRecord = InquirySubmission & {
@@ -62,7 +55,7 @@ export type NewInquiryRecord = InquirySubmission & {
   idempotencyKeyHash: string;
   requestFingerprint: string;
   privacyConsentedAt: string;
-  status: "new";
+  status: "received";
   revision: 1;
   createdAt: string;
   updatedAt: string;
@@ -75,24 +68,13 @@ export type SubmittedInquiryEvent = {
   actorUserId: null;
   eventType: "submitted";
   previousStatus: null;
-  nextStatus: "new";
-  createdAt: string;
-};
-
-export type QueuedInquiryNotificationAttempt = {
-  inquiryId: string;
-  deliveryKey: string;
-  notificationType: "new_inquiry";
-  provider: string;
-  status: "queued";
-  attemptCount: 0;
+  nextStatus: "received";
   createdAt: string;
 };
 
 export type NewInquiryPersistencePlan = {
   inquiry: NewInquiryRecord;
   submittedEvent: SubmittedInquiryEvent;
-  notificationAttempt: QueuedInquiryNotificationAttempt | null;
 };
 
 export type NewInquiryPersistencePlanResult =
@@ -106,8 +88,7 @@ export type NewInquiryPersistencePlanResult =
         | "invalid_request_fingerprint"
         | "invalid_received_at"
         | "invalid_retention_policy"
-        | "policy_version_mismatch"
-        | "invalid_notification_provider";
+        | "policy_version_mismatch";
     };
 
 export function createNewInquiryPersistencePlan(
@@ -142,26 +123,7 @@ export function createNewInquiryPersistencePlan(
   const retentionDueAt = calculateRetentionDueAt(input.receivedAt, input.retentionPolicy.retentionDays);
   if (!retentionDueAt) return { valid: false, reason: "invalid_retention_policy" };
 
-  const notificationProvider =
-    input.notificationProvider === undefined || input.notificationProvider === null
-      ? null
-      : parseNotificationProvider(input.notificationProvider);
-  if (input.notificationProvider !== undefined && input.notificationProvider !== null && !notificationProvider) {
-    return { valid: false, reason: "invalid_notification_provider" };
-  }
-
   const receivedAt = input.receivedAt.toISOString();
-  const notificationAttempt = notificationProvider
-    ? {
-        inquiryId,
-        deliveryKey: `new_inquiry:${inquiryId}`,
-        notificationType: "new_inquiry" as const,
-        provider: notificationProvider,
-        status: "queued" as const,
-        attemptCount: 0 as const,
-        createdAt: receivedAt,
-      }
-    : null;
 
   return {
     valid: true,
@@ -174,7 +136,7 @@ export function createNewInquiryPersistencePlan(
         ...input.submission,
         privacyPolicyVersion,
         privacyConsentedAt: receivedAt,
-        status: "new",
+        status: "received",
         revision: 1,
         createdAt: receivedAt,
         updatedAt: receivedAt,
@@ -186,10 +148,9 @@ export function createNewInquiryPersistencePlan(
         actorUserId: null,
         eventType: "submitted",
         previousStatus: null,
-        nextStatus: "new",
+        nextStatus: "received",
         createdAt: receivedAt,
       },
-      notificationAttempt,
     },
   };
 }
@@ -200,8 +161,8 @@ export type SaveNewInquiryResult =
   | { outcome: "idempotency_conflict" };
 
 /**
- * Implementations must atomically insert the inquiry, submitted event, and optional
- * notification attempt. They must use the idempotency key hash as a unique key,
+ * Implementations must atomically insert the inquiry and submitted event. They
+ * must use the idempotency key hash as a unique key,
  * replay only when the stored request fingerprint matches, and never log the
  * plan's personal data or return it to a public caller.
  */

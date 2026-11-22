@@ -32,7 +32,7 @@ export type StoredInquiryForNotification = InquirySubmission & {
 export type RenderedInquiryNotification = {
   from: string;
   to: string;
-  replyTo: string;
+  replyTo: string | null;
   subject: string;
   text: string;
 };
@@ -99,7 +99,7 @@ export function buildNewInquiryNotification(
       `문의 유형: ${oneLine(inquiryType)}`,
       `관심 교육 분야: ${oneLine(programName)}`,
       `이름 또는 기관명: ${oneLine(inquiry.senderName)}`,
-      `회신 이메일: ${oneLine(inquiry.senderEmail)}`,
+      `이메일: ${inquiry.senderEmail ? oneLine(inquiry.senderEmail) : "입력 안 함"}`,
       "",
       "문의 내용",
       multiline(inquiry.message),
