@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateSignupPreview } from "../app/signup/validation.ts";
+import { validateSignup as validateSignupPreview } from "../app/signup/validation.ts";
 
 function data(overrides = {}) {
-  const values = { name: "홍길동", email: "sample@example.com", password: "example password", confirmPassword: "example password", previewAcknowledged: "on", ...overrides };
+  const values = { name: "홍길동", email: "sample@example.com", password: "example password", confirmPassword: "example password", ageConfirmed: "on", privacyConsent: "on", overseasConsent: "on", ...overrides };
   const form = new FormData();
   for (const [key, value] of Object.entries(values)) form.set(key, value);
   return form;
@@ -13,11 +13,11 @@ test("valid example data passes without returning credentials", () => {
   assert.deepEqual(validateSignupPreview(data()), {});
 });
 test("empty submission identifies every required field", () => {
-  assert.equal(Object.keys(validateSignupPreview(new FormData())).length, 5);
+  assert.equal(Object.keys(validateSignupPreview(new FormData())).length, 7);
 });
-test("rejects blank name, malformed email and missing acknowledgment", () => {
-  const errors = validateSignupPreview(data({ name: "  ", email: "sample@", previewAcknowledged: "" }));
-  assert.deepEqual(Object.keys(errors), ["name", "email", "previewAcknowledged"]);
+test("rejects blank name, malformed email and missing consent", () => {
+  const errors = validateSignupPreview(data({ name: "  ", email: "sample@", privacyConsent: "" }));
+  assert.deepEqual(Object.keys(errors), ["name", "email", "privacyConsent"]);
 });
 test("password boundaries and all-space passwords are enforced", () => {
   for (const password of ["a".repeat(11), "a".repeat(129), " ".repeat(12)]) {
@@ -37,4 +37,8 @@ test("file values cannot bypass string field validation", () => {
   const form = data();
   form.set("name", new Blob(["sample"]), "sample.txt");
   assert.ok(validateSignupPreview(form).name);
+});
+test("age and overseas consent must be individually checked", () => {
+  assert.ok(validateSignupPreview(data({ ageConfirmed: "" })).ageConfirmed);
+  assert.ok(validateSignupPreview(data({ overseasConsent: "" })).overseasConsent);
 });

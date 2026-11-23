@@ -1,0 +1,12 @@
+.search { max-width: 36rem; }
+.search label { display: block; font-weight: 700; margin-bottom: .5rem; }
+.search div { display: flex; gap: .5rem; }
+.search input { width: 100%; min-width: 0; min-height: 46px; padding: .6rem; border: 1px solid #76899a; border-radius: .5rem; background: white; }
+.tableWrap { overflow-x: auto; margin-top: 1rem; border: 1px solid var(--color-border); border-radius: .6rem; background: white; }
+.table { width: 100%; min-width: 38rem; border-collapse: collapse; text-align: left; }
+.table th, .table td { padding: .85rem 1rem; border-bottom: 1px solid var(--color-border); overflow-wrap: anywhere; }
+.table th { background: var(--color-surface); color: var(--color-navy); }
+.caption { padding: .75rem; text-align: left; font-weight: 700; }
+.pagination { display: flex; gap: 1rem; margin-block: 1rem; }
+.pagination a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; }
+.help { max-width: 48rem; margin-block: 1rem; color: #465966; font-size: .9rem; }
