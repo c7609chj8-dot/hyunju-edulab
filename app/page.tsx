@@ -39,6 +39,7 @@ export default function Home() {
           <div className="home-hero-actions">
             <Link className="home-primary-button" href="/contact">강의 의뢰하기 <span aria-hidden="true">→</span></Link>
             <Link className="home-text-link" href="/education">교육 프로그램 보기 <span aria-hidden="true">↗</span></Link>
+            <Link className="home-text-link" href="/signup">회원가입 <span aria-hidden="true">→</span></Link>
           </div>
           <p className="home-hero-caption">현장의 경험을 AI로 연결하고, 교육의 가치를 미래로 확장합니다.</p>
         </div>
