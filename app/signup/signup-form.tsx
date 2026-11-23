@@ -62,7 +62,7 @@ export default function SignupForm({ enabled }: { enabled: boolean }) {
         {([
           ["ageConfirmed", "만 14세 이상입니다."],
           ["privacyConsent", "[필수] 개인정보 수집·이용에 동의합니다."],
-          ["overseasConsent", "[필수] Supabase를 통한 인도(뭄바이) 개인정보 보관·처리에 동의합니다."],
+          ["overseasConsent", "[필수] Vercel·Supabase를 통한 미국·인도 개인정보 이전·처리·보관에 동의합니다."],
         ] as const).map(([name, label]) => (
           <div key={name}>
             <label className={styles.confirmation} htmlFor={`signup-${name}`}>

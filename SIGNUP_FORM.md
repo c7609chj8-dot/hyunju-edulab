@@ -23,7 +23,7 @@
 
 ## 현재 운영 범위와 남은 설정
 
-- 기존 `hyunju-edulab-test` 프로젝트를 사용한다. DB 위치는 인도 뭄바이이며, `/privacy`와 가입 동의에 표시했다.
+- 기존 `hyunju-edulab-test` 프로젝트를 사용한다. DB 위치는 인도 뭄바이이며, Vercel 인증 요청 서버는 미국 iad1이다. 두 경로를 `/privacy`와 가입 동의에 표시했다.
 - 이메일 인증은 켜져 있고 익명 로그인은 꺼져 있다. 인증 서버의 최소 비밀번호 길이도 12자로 설정했다.
 - 별도 SMTP가 없어서 Supabase 기본 인증 메일은 프로젝트 팀의 허용된 주소로 제한된다. 일반 방문자 공개 가입 전 custom SMTP 및 발신 도메인 인증이 필요하다. 이메일 인증을 끄는 방식으로 우회하지 않는다.
 - 운영·개발 환경은 기존 테스트 프로젝트를 연결한다. Preview에는 인증 환경변수를 주입하지 않아 실수로 실제 가입을 받지 않는다.
@@ -46,3 +46,4 @@
 - https://supabase.com/docs/guides/auth/auth-smtp
 - https://supabase.com/privacy
 - https://supabase.com/legal/customer-resources/data-processing-addendum
+- https://vercel.com/legal/privacy-notice
