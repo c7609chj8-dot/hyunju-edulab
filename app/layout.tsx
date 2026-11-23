@@ -51,6 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               {siteLinks.map(({ href, label }) => (
                 <Link key={href} href={href}>{label}</Link>
               ))}
+              <Link href="/signup">회원가입</Link>
             </nav>
             <InquiryQrCode />
           </div>
