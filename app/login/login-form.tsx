@@ -4,10 +4,11 @@ import { login } from "../auth/actions";
 import { initialAuthState } from "../auth/state";
 import styles from "../signup/signup.module.css";
 
-export default function LoginForm({ enabled }: { enabled: boolean }) {
+export default function LoginForm({ enabled, destination = "/account" }: { enabled: boolean; destination?: "/account" | "/admin" }) {
   const [state, action, pending] = useActionState(login, initialAuthState);
   return (
     <form action={action}>
+      <input type="hidden" name="destination" value={destination} />
       <fieldset className={styles.form} disabled={!enabled || pending}>
         <legend className={styles.legend}>로그인 정보 입력</legend>
         <div className={styles.field}><label htmlFor="login-email">이메일</label><input id="login-email" name="email" type="email" autoComplete="username" autoCapitalize="none" maxLength={254} required /></div>

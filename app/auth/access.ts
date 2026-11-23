@@ -8,6 +8,8 @@ export async function requireMember() {
   const client = await createAuthClient();
   const { data: { user }, error } = await client.auth.getUser();
   if (error || !user || !user.email_confirmed_at || user.is_anonymous) redirect("/login");
+  const profile = await client.from("member_profiles").select("account_status").eq("user_id", user.id).maybeSingle();
+  if (profile.error || !profile.data || profile.data.account_status !== "active") redirect("/login?error=membership");
   return { client, user };
 }
 export async function memberAdministrator() {

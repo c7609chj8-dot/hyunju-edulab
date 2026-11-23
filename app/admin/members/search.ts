@@ -8,5 +8,5 @@ export function memberPage(input: unknown) {
 }
 export function memberSearchFilter(input: string) {
   const escaped = memberSearch(input).replace(/[%_\\]/gu, "\\$&");
-  return `full_name.ilike.%${escaped}%,email.ilike.%${escaped}%`;
+  return `full_name.ilike.%${escaped}%,username.ilike.%${escaped}%,email.ilike.%${escaped}%`;
 }

@@ -7,7 +7,7 @@ test("search retains Korean names and email characters", () => {
 });
 test("query syntax cannot add PostgREST filter branches", () => {
   const filter = memberSearchFilter("x),user_id.neq.(null),email.ilike.%");
-  assert.equal(filter.split(",").length, 2);
+  assert.equal(filter.split(",").length, 3);
   assert.ok(!filter.includes("("));
   assert.equal(memberSearch(["a", "b"]), "");
 });

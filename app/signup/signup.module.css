@@ -12,6 +12,7 @@
 .field label { color: var(--color-navy); font-weight: 700; }
 .field input { width: 100%; min-width: 0; min-height: 48px; padding: .65rem .8rem; border: 1px solid #76899a; border-radius: .5rem; background: white; font: inherit; }
 .field input[aria-invalid="true"] { border-color: #a4262c; }
+.field select { width: 100%; min-height: 48px; padding: .65rem .8rem; border: 1px solid #76899a; border-radius: .5rem; background: white; font: inherit; }
 .passwordRow { display: flex; gap: .5rem; }
 .passwordRow input { flex: 1; }
 .toggle { flex: 0 0 auto; min-width: 64px; min-height: 44px; padding: .5rem; border: 1px solid #76899a; border-radius: .5rem; color: var(--color-navy); font-weight: 700; cursor: pointer; }

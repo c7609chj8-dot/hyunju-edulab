@@ -1,4 +1,4 @@
-export const membershipPolicyVersion = "2026-11-23";
+export const membershipPolicyVersion = "2026-11-23.2";
 export function authConfigured() {
   return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY && process.env.AUTH_SITE_URL);
 }

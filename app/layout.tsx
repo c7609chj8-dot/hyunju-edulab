@@ -54,6 +54,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/signup">회원가입</Link>
               <Link href="/login">로그인</Link>
               <Link href="/account">내 계정</Link>
+              <Link href="/admin/login">관리자</Link>
               <Link href="/privacy">개인정보 처리방침</Link>
             </nav>
             <InquiryQrCode />

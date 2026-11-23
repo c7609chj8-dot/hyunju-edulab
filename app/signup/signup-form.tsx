@@ -29,7 +29,7 @@ export default function SignupForm({ enabled }: { enabled: boolean }) {
     <form action={action} onSubmit={validate} noValidate aria-describedby="signup-notice" onChange={() => setErrors({})}>
       <fieldset className={styles.form} disabled={!enabled || pending}>
         <legend className={styles.legend}>회원가입 정보 입력</legend>
-        <p className={styles.help}>모든 항목은 필수입니다.</p>
+        <p className={styles.help}>선택 표시가 없는 항목은 필수입니다. 로그인에는 이메일을 사용합니다.</p>
         <div className={styles.field}>
           <label htmlFor="signup-name">이름</label>
           <input id="signup-name" name="name" autoComplete="name" placeholder="예: 홍길동" maxLength={80} required aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "signup-name-error" : undefined} />
@@ -54,15 +54,20 @@ export default function SignupForm({ enabled }: { enabled: boolean }) {
           <input id="signup-confirm-password" name="confirmPassword" type={showPassword ? "text" : "password"} autoComplete="new-password" minLength={12} maxLength={128} required aria-invalid={Boolean(errors.confirmPassword)} aria-describedby={errors.confirmPassword ? "signup-confirm-password-error" : undefined} />
           {errors.confirmPassword ? <p id="signup-confirm-password-error" className={styles.error}>{errors.confirmPassword}</p> : null}
         </div>
+        {([
+          ["username", "회원 아이디 (선택)", "text", "예: safemind01", 20],
+          ["address", "주소 (선택)", "text", "주소를 입력해 주세요", 300],
+          ["phone", "전화번호 (선택)", "tel", "010-1234-5678", 20],
+        ] as const).map(([name, label, type, placeholder, maxLength]) => <div className={styles.field} key={name}><label htmlFor={`signup-${name}`}>{label}</label><input id={`signup-${name}`} name={name} type={type} placeholder={placeholder} maxLength={maxLength} autoComplete={name === "address" ? "street-address" : name === "phone" ? "tel" : "off"} aria-invalid={Boolean(errors[name])} aria-describedby={errors[name] ? `signup-${name}-error` : undefined} />{errors[name] ? <p className={styles.error} id={`signup-${name}-error`}>{errors[name]}</p> : null}</div>)}
         <div className={styles.consentNotice}>
           <p><strong>개인정보 수집·이용</strong></p>
-          <p>이름·이메일·비밀번호 인증정보와 동의 기록을 회원 식별·로그인·계정 관리에 사용하며, 탈퇴 또는 동의 철회 처리 시 파기합니다. 동의를 거부할 수 있으나 가입은 제한됩니다.</p>
+          <p>이름·이메일·비밀번호 인증정보와 동의 기록을 회원 식별·로그인·계정 관리에 사용하며, 탈퇴 또는 동의 철회 처리 시 파기합니다. 회원 아이디·주소·전화번호는 선택 입력이며 회원 정보 관리에 사용합니다. 선택 항목을 입력하지 않아도 가입할 수 있습니다.</p>
           <Link href="/privacy">개인정보 처리방침과 국외 이전 상세 안내</Link>
         </div>
         {([
           ["ageConfirmed", "만 14세 이상입니다."],
           ["privacyConsent", "[필수] 개인정보 수집·이용에 동의합니다."],
-          ["overseasConsent", "[필수] Vercel·Supabase를 통한 미국·인도 개인정보 이전·처리·보관에 동의합니다."],
+          ["overseasConsent", "[필수] Vercel·Supabase를 통한 미국·일본 개인정보 이전·처리·보관에 동의합니다."],
         ] as const).map(([name, label]) => (
           <div key={name}>
             <label className={styles.confirmation} htmlFor={`signup-${name}`}>

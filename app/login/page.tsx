@@ -13,6 +13,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <p className="eyebrow">MEMBERSHIP</p><h1>로그인</h1><p className={styles.note}>가입한 이메일과 비밀번호로 로그인해 주세요.</p>
       {!authConfigured() ? <p className={styles.notice}>로그인 연결 설정을 준비 중입니다.</p> : null}
       {error === "confirmation" ? <p role="alert" className={styles.error}>인증 링크가 만료됐거나 유효하지 않습니다. 가입할 때 사용한 브라우저에서 열었는지 확인해 주세요.</p> : null}
+      {error === "membership" ? <p role="alert" className={styles.error}>회원 정보 또는 이용 상태를 확인할 수 없습니다. 운영자에게 문의해 주세요.</p> : null}
       <LoginForm enabled={authConfigured()} /><p className={styles.help}>아직 회원이 아니신가요? <Link href="/signup">회원가입</Link></p>
     </div></section>
   );

@@ -1,4 +1,4 @@
-export const signupFields = ["name", "email", "password", "confirmPassword", "ageConfirmed", "privacyConsent", "overseasConsent"] as const;
+export const signupFields = ["name", "email", "username", "password", "confirmPassword", "address", "phone", "ageConfirmed", "privacyConsent", "overseasConsent"] as const;
 export type SignupField = (typeof signupFields)[number];
 export type SignupErrors = Partial<Record<SignupField, string>>;
 
@@ -11,6 +11,12 @@ export function validateSignup(data: FormData): SignupErrors {
   const name = read("name").trim();
   const email = read("email").trim();
   const password = read("password");
+  const username = read("username").trim().toLowerCase();
+  const address = read("address").trim();
+  const phone = read("phone").replace(/[-\s]/gu, "");
+  if (username && !/^[a-z][a-z0-9_]{3,19}$/u.test(username)) errors.username = "아이디는 영문 소문자로 시작하는 4~20자 영문·숫자·밑줄로 입력해 주세요.";
+  if (address.length > 300) errors.address = "주소는 300자 이내로 입력해 주세요.";
+  if (phone && !/^0[0-9]{8,10}$/u.test(phone)) errors.phone = "전화번호를 확인해 주세요. 예: 010-1234-5678";
 
   if (!name || name.length > 80) errors.name = "이름을 1~80자로 입력해 주세요.";
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(email)) {

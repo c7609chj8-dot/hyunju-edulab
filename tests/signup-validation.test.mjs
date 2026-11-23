@@ -42,3 +42,9 @@ test("age and overseas consent must be individually checked", () => {
   assert.ok(validateSignupPreview(data({ ageConfirmed: "" })).ageConfirmed);
   assert.ok(validateSignupPreview(data({ overseasConsent: "" })).overseasConsent);
 });
+test("optional membership fields accept valid values and reject malformed input", () => {
+  assert.deepEqual(validateSignupPreview(data({ username: "member_01", address: "검증 주소", phone: "010-1234-5678" })), {});
+  assert.ok(validateSignupPreview(data({ username: "a" })).username);
+  assert.ok(validateSignupPreview(data({ phone: "abc010" })).phone);
+  assert.ok(validateSignupPreview(data({ address: "a".repeat(301) })).address);
+});

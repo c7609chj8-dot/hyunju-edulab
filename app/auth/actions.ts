@@ -10,13 +10,14 @@ export async function signup(_previous: AuthState, data: FormData): Promise<Auth
   if (!authConfigured()) return { status: "error", message: "회원가입 서비스를 준비 중입니다." };
   const errors = validateSignup(data);
   if (Object.keys(errors).length) return { status: "error", message: "입력 내용과 동의를 확인해 주세요.", errors };
+  const optionalText = (key: string) => typeof data.get(key) === "string" ? String(data.get(key)).trim() : "";
   try {
     const client = await createAuthClient();
     const { data: result, error } = await client.auth.signUp({
       email: String(data.get("email")).trim(), password: String(data.get("password")),
       options: {
         emailRedirectTo: `${authSiteUrl()}/auth/callback`,
-        data: { full_name: String(data.get("name")).trim(), membership_policy_version: membershipPolicyVersion, privacy_consent: true, overseas_consent: true, age_14_or_older: true },
+        data: { membership_app: "hyunju-edulab", full_name: String(data.get("name")).trim(), username: optionalText("username").toLowerCase(), address: optionalText("address"), phone: optionalText("phone").replace(/[-\s]/gu, ""), membership_policy_version: membershipPolicyVersion, privacy_consent: true, overseas_consent: true, age_14_or_older: true },
       },
     });
     if (error) {
@@ -37,10 +38,15 @@ export async function login(_previous: AuthState, data: FormData): Promise<AuthS
   if (!email || email.length > 254 || !password || password.length > 128) return { status: "error", message: "이메일과 비밀번호를 확인해 주세요." };
   try {
     const client = await createAuthClient();
-    const { error } = await client.auth.signInWithPassword({ email, password });
+    const { data: signedIn, error } = await client.auth.signInWithPassword({ email, password });
     if (error) return { status: "error", message: error.status === 429 ? "요청이 많습니다. 잠시 후 다시 시도해 주세요." : "이메일·비밀번호가 올바르지 않거나 이메일 인증이 완료되지 않았습니다." };
+    const membership = await client.from("member_profiles").select("account_status").eq("user_id", signedIn.user.id).maybeSingle();
+    if (membership.error || !membership.data || membership.data.account_status !== "active") {
+      await client.auth.signOut({ scope: "local" });
+      return { status: "error", message: membership.error ? "회원 정보 연결을 확인해 주세요." : membership.data ? "이용 정지된 계정입니다. 운영자에게 문의해 주세요." : "이 홈페이지의 회원 등록 정보를 확인할 수 없습니다. 운영자에게 문의해 주세요." };
+    }
   } catch { return { status: "error", message: "인증 서비스에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요." }; }
-  redirect("/account");
+  redirect(data.get("destination") === "/admin" ? "/admin" : "/account");
 }
 
 export async function logout() {
