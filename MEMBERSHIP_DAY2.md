@@ -1,9 +1,9 @@
-# 회원가입 2일 차: 코드 검증과 DB 승인 대기
+# 회원가입 2일 차: 코드 검증과 승인된 DB 적용
 
 - 작업일: 2026-11-24 (한국 시간)
 - 대상 저장소: `c7609chj8-dot/hyunju-edulab`
-- 대상 DB: 기존 `ai-education-hub-dev`; 이번 작업에서는 원격 SQL을 실행하지 않았다.
-- 상태: 회원가입·기존 계정 등록 코드 보완. 신규 DB 함수 적용과 실제 가입·메일·DB 권한 통합시험은 최종 승인 대기.
+- 대상 DB: 기존 `ai-education-hub-dev` (`uenvjqgylrevujdjpfed`). 코드 작업 후 사용자의 최종 승인을 받아 신규 함수 SQL을 적용했다.
+- 상태: 회원가입·기존 계정 등록 코드 보완과 신규 DB 함수 적용·읽기 전용 검증 완료. 홈페이지 등록 기능 활성화와 실제 가입·메일·쓰기 통합시험은 미실시다.
 
 ## 보완한 사용자 흐름
 
@@ -26,11 +26,11 @@
 - 기존 이메일 가입 응답만으로 계정 존재 여부나 신규 생성 여부를 단정하지 않는다. 로그인 경로를 안내한다.
 - 새 등록 RPC의 아이디 중복 오류는 해당 입력란에 표시한다. DB 오류 원문은 사용자에게 반환하지 않는다.
 
-## DB 변경 승인 범위
+## 승인받아 적용한 DB 변경 범위
 
-전체 SQL: [20261124132430_enroll_existing_member.sql](supabase/pending/20261124132430_enroll_existing_member.sql)
+전체 SQL: [20261124133718_enroll_existing_member.sql](supabase/migrations/20261124133718_enroll_existing_member.sql)
 
-Supabase CLI의 `migration new`로 생성한 파일을 승인 대기 폴더로 이동했다. `supabase/pending/`는 일반 마이그레이션 적용 대상인 `supabase/migrations/` 밖이다. 기존 생성 마이그레이션을 재실행하지 않는다.
+Supabase CLI의 `migration new`로 생성한 파일을 승인 대기 폴더에 보관했다가, 2026-11-24 사용자의 "승인"을 받은 뒤 원격 DB에 적용했다. 원격에 기록된 마이그레이션 버전 `20261124133718`에 맞춰 적용 파일을 `supabase/migrations/`로 이동했다. 기존 생성 마이그레이션을 재실행하지 않았다.
 
 | 검토 항목 | 내용 |
 |---|---|
@@ -47,16 +47,17 @@ Supabase CLI의 `migration new`로 생성한 파일을 승인 대기 폴더로 �
 | `TRUNCATE` | 없음 |
 | `UPDATE` | 없음. `ON CONFLICT (user_id) DO NOTHING` 사용 |
 | 기존 테이블·정책·트리거 변경 | 없음 |
-| 실행 상태 | 미실행. SQL 함수의 실제 DB 컴파일·동작·보안 점검기는 아직 검증하지 않음 |
+| 실행 상태 | 적용 성공. 함수 보안 모드·실행 권한·거절 경로·기존 회원 재호출을 읽기 전용으로 검증. 신규 프로필 INSERT 경로와 브라우저 저장 통합시험은 미실시 |
 
 새 함수는 `CREATE FUNCTION`을 사용한다. 같은 이름과 인자의 함수가 이미 있으면 실패하고, 기존 함수를 `CREATE OR REPLACE`로 덮어쓰지 않는다. 생성과 권한 제한은 하나의 트랜잭션이다.
 
-### 비활성화 상태 유지
+### 홈페이지 등록 화면 비활성화 상태 유지
 
 - `MEMBERSHIP_ENROLLMENT_ENABLED`가 정확히 `true`인 경우에만 새 등록 Server Action을 실행한다.
 - 기본값은 비활성화이며 `.env.example`에도 `false`로 기록했다. 실제 환경변수나 Vercel 설정은 변경하지 않았다.
 - 비활성화 상태에서는 등록 버튼을 사용할 수 없고 운영자 문의를 안내한다. Server Action을 직접 호출해도 새 RPC를 실행하지 않는다.
 - 로그인과 기존 회원·관리자 화면은 기존 테이블을 계속 사용한다.
+- 승인된 SQL에 따라 DB RPC 자체는 `authenticated` 역할에 실행 권한이 있다. 애플리케이션의 기능 플래그는 DB API의 실행 권한을 취소하는 장치가 아니다. DB 함수가 본인 식별·이메일 인증·정지 상태·필수 동의를 독립적으로 검사한다.
 
 ## 검증
 
@@ -92,8 +93,24 @@ Supabase CLI의 `migration new`로 생성한 파일을 승인 대기 폴더로 �
 
 DB 적용·기능 활성화·실제 계정 생성 및 삭제는 코드 커밋이나 GitHub push만으로 승인된 것으로 처리하지 않는다.
 
+## 2026-11-24 승인 후 적용 결과
+
+- 사용자는 안내된 신규 함수 SQL의 DB 적용을 최종 승인했다. 홈페이지 등록 기능 활성화나 임시 계정 생성·삭제를 추가 승인한 것으로 해석하지 않았다.
+- 적용 전 대상 프로젝트와 기존 테이블·열·RLS·필요한 Auth 열을 확인했다. 동일 이름의 함수가 없어 기존 함수를 덮어쓰지 않았다.
+- `enroll_existing_member` 마이그레이션 적용이 성공했고 원격 이력의 버전은 `20261124133718`이다.
+- [읽기 전용 검증 SQL](supabase/tests/enrollment_readonly.sql)을 실제 DB에서 실행해 `PASS`를 확인했다.
+- 공개 함수는 `SECURITY INVOKER`, 비공개 함수는 고정된 빈 `search_path`의 `SECURITY DEFINER`이며, 두 함수 모두 `PUBLIC`·`anon` 실행을 차단하고 `authenticated` 실행만 허용함을 확인했다.
+- 인증 식별자 없음, 존재하지 않는 Auth 계정, 필수 동의 누락, 익명 역할 호출의 거절을 확인했다.
+- 이미 가입된 인증 회원으로 재호출했을 때 동일 회원 식별자를 반환하고 기존 프로필을 수정하지 않음을 확인했다. 새 회원 생성 시험은 하지 않았다.
+- 적용 전후 회원정보·관리자 역할의 데이터 지문이 같았다. 회원정보 1건, 관리자 역할 1건, 수정 이력 0건, Auth 계정 2건으로 유지됐다. 데이터 지문이나 실제 회원정보는 저장소에 기록하지 않는다.
+- 적용 후 보안 점검기에 신규 경고는 없었다. 기존 유출 비밀번호 차단 비활성화 경고와 비공개 테이블 2개의 정책 없음 정보 항목은 유지됐다. 공유 Auth 설정과 다른 서비스의 권한은 변경하지 않았다.
+- 기존 테이블·트리거·정책을 변경하지 않는 추가 함수 작업이므로 별도 데이터 덤프·복원 작업은 수행하지 않았다. 데이터 지문 비교는 백업을 대신하는 복구 수단은 아니다.
+- 이후 남은 작업은 홈페이지 등록 기능 활성화와 허가된 계정의 실제 저장·메일·권한 통합시험이다.
+
 ## 참조
 
 - [Supabase 사용자 데이터 관리](https://supabase.com/docs/guides/auth/managing-user-data)
 - [Supabase DB 함수와 권한](https://supabase.com/docs/guides/database/functions)
+- [기존 유출 비밀번호 차단 경고 안내](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection)
+- [비공개 테이블의 정책 없음 정보 항목](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)
 - [Next.js Server Actions와 폼](https://nextjs.org/docs/app/guides/forms)

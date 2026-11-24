@@ -189,7 +189,7 @@ npm start
 
 ## 관련 문서
 
-- [회원가입 2일 차 코드 검증 및 DB 승인 범위](MEMBERSHIP_DAY2.md)
+- [회원가입 2일 차 코드 검증 및 승인된 DB 적용 결과](MEMBERSHIP_DAY2.md)
 - [회원가입 테이블 1일 차 점검 및 2일 차 작업](MEMBERSHIP_DAY1.md)
 - [현재 사이트 분석](CURRENT_SITE_AUDIT.md)
 - [벤치마킹](BENCHMARK_ANALYSIS.md)

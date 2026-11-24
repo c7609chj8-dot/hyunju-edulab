@@ -1,4 +1,4 @@
--- APPROVAL REQUIRED: prepared locally; do not apply to the hosted DB yet.
+-- Approved and applied to ai-education-hub-dev on 2026-11-24.
 -- Adds two new functions only. No table/trigger/policy replacement or data backfill.
 begin;
 
