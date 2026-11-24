@@ -189,6 +189,7 @@ npm start
 
 ## 관련 문서
 
+- [회원가입 테이블 1일 차 점검 및 2일 차 작업](MEMBERSHIP_DAY1.md)
 - [현재 사이트 분석](CURRENT_SITE_AUDIT.md)
 - [벤치마킹](BENCHMARK_ANALYSIS.md)
 - [개선 기획](WEBSITE_REDESIGN_PLAN.md)
