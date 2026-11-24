@@ -78,6 +78,9 @@ export default function Navigation() {
             </Link>
           );
         })}
+        <Link href="/signup" aria-current={pathname === "/signup" ? "page" : undefined} onNavigate={() => setOpen(false)}>
+          회원가입
+        </Link>
       </nav>
     </div>
   );

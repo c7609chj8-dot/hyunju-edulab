@@ -1,7 +1,16 @@
+import { createHash, randomInt, randomUUID } from "node:crypto";
+import { createNewInquiryPersistencePlan } from "../../inquiries/persistence.server";
+import { createInquiryStore } from "../../inquiries/store.server";
 import { NextResponse } from "next/server";
 import { validateIdempotencyKey } from "../../inquiries/idempotency";
 import { getInquiryRetentionPolicy } from "../../inquiries/retention.server";
 import { validateInquirySubmission } from "../../inquiries/validation";
+
+const inquiryNumberAlphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+function sha256(value: string) {
+  return createHash("sha256").update(value).digest("hex");
+}
 
 const responseHeaders = { "Cache-Control": "no-store" };
 
@@ -44,7 +53,7 @@ export async function POST(request: Request) {
     return json({ error: "payload_too_large", message: "요청 내용이 너무 큽니다." }, 413);
   }
 
-  const requestId = crypto.randomUUID();
+  const requestId = randomUUID();
   let payload: unknown;
   try {
     payload = await request.json();
@@ -60,6 +69,37 @@ export async function POST(request: Request) {
     return json({ error: "invalid_inquiry", fields: validation.errors }, 400);
   }
 
-  console.error("[inquiries] submission blocked because no persistence adapter is configured", { requestId });
-  return unavailable();
+  const { privacyConsentedAt, ...normalizedSubmission } = validation.data;
+  const inquiryNumber = "HJ-" + Array.from(
+    { length: 12 },
+    () => inquiryNumberAlphabet[randomInt(inquiryNumberAlphabet.length)],
+  ).join("");
+  const persistence = createNewInquiryPersistencePlan({
+    submission: validation.data,
+    inquiryId: randomUUID(),
+    inquiryNumber,
+    idempotencyKeyHash: sha256(idempotency.key),
+    requestFingerprint: sha256(JSON.stringify(normalizedSubmission)),
+    receivedAt: new Date(privacyConsentedAt),
+    retentionPolicy: retentionPolicy.policy,
+  });
+  if (!persistence.valid) return unavailable();
+
+  try {
+    const store = createInquiryStore();
+    if (!store) return unavailable();
+
+    const result = await store.saveNewInquiry(persistence.plan);
+    if (result.outcome === "idempotency_conflict") {
+      return json(
+        { error: "idempotency_conflict", message: "같은 접수 키로 다른 문의를 보낼 수 없습니다." },
+        409,
+      );
+    }
+
+    return json(result, result.outcome === "created" ? 201 : 200);
+  } catch {
+    console.error("[inquiries] storage failed", { requestId });
+    return unavailable();
+  }
 }

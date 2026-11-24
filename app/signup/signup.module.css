@@ -28,3 +28,6 @@
 .form:disabled { opacity: .65; }
 .form:disabled button { cursor: wait; }
 @media (min-width: 56rem) { .page { grid-template-columns: 1fr minmax(0, 30rem); gap: 3rem; } .intro { padding-top: 3rem; } }
+
+.completion { display: grid; gap: 1rem; margin-top: 1.25rem; }
+.completion a { justify-self: start; }

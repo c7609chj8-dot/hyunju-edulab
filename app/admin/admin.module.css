@@ -11,3 +11,6 @@
 .history { margin-block: 1.5rem; }
 .history li { padding-block: .65rem; border-bottom: 1px solid var(--color-border); font-size: .9rem; }
 @media(min-width: 48rem) { .cards { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+
+.inquiryMessage { white-space: pre-wrap; overflow-wrap: anywhere; }
+.dashboardActions { display: flex; flex-wrap: wrap; gap: 1rem; }

@@ -44,7 +44,7 @@ export default function DigitalPage() {
         <div className="program-faq">
           <details><summary>개인정보가 포함된 자료를 보내야 하나요?</summary><p>초기 범위 검토에는 개인정보를 제거한 예시만 준비해 주세요. 비밀번호나 서비스 비밀키는 문의 내용에 입력하지 마세요.</p></details>
           <details><summary>유료 도구나 운영 비용도 포함되나요?</summary><p>도구 구독·도메인·호스팅·외부 연동 비용과 유지관리 범위는 사전 협의 항목입니다.</p></details>
-          <details><summary>의뢰 버튼을 누르면 접수되나요?</summary><p>선택한 서비스의 문의 유형을 표시하는 입력 확인 화면으로 이동합니다. 현재 입력 내용은 전송·저장되지 않으며 실제 접수는 준비 중입니다.</p></details>
+          <details><summary>의뢰 버튼을 누르면 접수되나요?</summary><p>선택한 서비스의 문의 유형이 미리 선택된 문의 화면으로 이동합니다. 문의를 제출한 뒤 접수번호가 표시되면 접수가 완료된 것입니다.</p></details>
         </div>
       </section>
       <div className="section-action">

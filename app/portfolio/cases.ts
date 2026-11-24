@@ -13,7 +13,7 @@ export const portfolioCases = [
     ],
     result: "프런트엔드 화면을 구축했습니다. 프로그램 탐색과 자료 검색, 문의 입력 형식을 확인할 수 있습니다.",
     status: "프런트엔드 개선 중",
-    limitation: "문의 전송·저장·알림과 관리자 기능은 후속 개발 범위입니다. 현재 문의 화면에서는 실제 접수되지 않습니다.",
+    limitation: "문의 접수 여부는 문의 화면에서 확인할 수 있습니다. 이메일 알림과 관리자 문의함은 후속 개발 범위입니다.",
     links: [
       { href: "/education", label: "교육 프로그램 보기" },
       { href: "/materials", label: "교육자료실 보기" },
