@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { siteLinks } from "./site-links";
+import { primarySiteLinks } from "./site-links";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function Navigation() {
         </svg>
       </button>
       <nav id="site-navigation-links" className="navigation-links" aria-label="주요 메뉴">
-        {siteLinks.map(({ href, label }) => {
+        {primarySiteLinks.map(({ href, label }) => {
           const currentPage = pathname === href;
           const currentSection = pathname.startsWith(href + "/");
           return (
