@@ -328,3 +328,19 @@ body { color: #142230; background: #f7f8f4; }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 }
+
+/* Protected phone reveal: default markup contains only a generic mask. */
+.phone-reveal { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; max-width: 100%; vertical-align: middle; }
+.phone-reveal--hero, .phone-reveal--contact { flex-direction: column; align-items: flex-start; }
+.phone-mask { font-weight: 700; letter-spacing: .04em; }
+.phone-reveal button { cursor: pointer; }
+.phone-inline-button, .phone-hide { display: inline-flex; align-items: center; min-height: 44px; padding: .35rem .65rem; color: #087f76; background: transparent; text-decoration: underline; text-underline-offset: .2em; }
+.phone-reveal--hero .phone-hide { color: #dffec6; }
+.phone-reveal--contact .phone-inline-button, .phone-reveal--contact .phone-hide { color: #dffec6; }
+.phone-reveal--contact .contact-phone-link { margin-block: .25rem; }
+.phone-dialog { position: fixed; inset: 0; margin: auto; width: min(32rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow-y: auto; padding: 1.5rem; border: 1px solid #dce6ed; border-radius: 1rem; background: #f7f8f4; color: #142230; }
+.phone-dialog::backdrop { background: #06151acc; }
+.phone-dialog h2 { color: #102840; font-size: 1.35rem; }
+.phone-dialog p { margin-block: .75rem; }
+.phone-dialog a { color: #087f76; text-decoration: underline; }
+.phone-challenge { min-height: 140px; margin-block: 1rem; }
