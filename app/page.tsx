@@ -28,21 +28,19 @@ export default function Home() {
         />
         <div className="home-hero-scrim" />
         <div className="shell home-hero-content">
-          <p className="home-kicker">HYUNJU EDU LAB · FIELD LEARNING</p>
+          <p className="home-kicker">학교·교육기관·기업을 위한 참여형 교육</p>
           <h1 id="hero-title">
-            현장의 질문을,
-            <span>오늘의 배움으로 연결합니다.</span>
+            안전교육과
+            <span>AI 활용교육</span>
           </h1>
           <p className="home-hero-copy">
-            학교·교육기관·기업을 위한 안전교육과 AI 활용교육. 최현주 강사가 대상과 현장에 맞는 참여형 수업을 설계합니다.
+            최현주 강사가 교육 대상과 현장에 맞는 수업을 설계합니다. 학교와 산업 현장의 안전 실천부터 수업 준비·업무에 쓰는 AI 활용까지 함께 배웁니다.
           </p>
           <div className="home-hero-actions">
             <a className="home-primary-button" href={siteContact.phoneHref}>전화 문의 {siteContact.phone} <span aria-hidden="true">→</span></a>
-            <Link className="home-text-link" href="/contact">강의 문의 안내 <span aria-hidden="true">→</span></Link>
             <Link className="home-text-link" href="/education">교육 프로그램 보기 <span aria-hidden="true">↗</span></Link>
-            <Link className="home-text-link" href="/signup">회원가입 <span aria-hidden="true">→</span></Link>
           </div>
-          <p className="home-hero-caption">현장의 경험을 AI로 연결하고, 교육의 가치를 미래로 확장합니다.</p>
+          <p className="home-hero-caption">회원가입 없이 교육 프로그램을 살펴보고 전화로 문의할 수 있습니다.</p>
         </div>
       </section>
 
@@ -64,7 +62,7 @@ export default function Home() {
         <div className="shell">
           <div className="home-section-heading">
             <p className="home-kicker">EDUCATION PROGRAMS</p>
-            <h2 id="programs-title">대상에 맞는 주제를<br />현장 언어로 풀어냅니다.</h2>
+            <h2 id="programs-title">학교·현장의 안전교육부터<br />수업·업무의 AI 활용까지.</h2>
             <p>교육의 목표와 참여자의 상황을 먼저 살피고, 실제 행동으로 이어지는 활동을 구성합니다.</p>
           </div>
           <ul className="home-program-grid">
@@ -119,8 +117,8 @@ export default function Home() {
             <figcaption>직접 해보며 익히는 AI 활용교육</figcaption>
           </figure>
           <div className="home-studio-copy">
-            <p className="home-kicker">DIGITAL PRACTICE</p>
-            <h2 id="studio-title">교육의 경험을<br />디지털 도구로 넓힙니다.</h2>
+            <p className="home-kicker">교육기관 디지털 지원</p>
+            <h2 id="studio-title">교육 운영에 필요한<br />디지털 도구를 함께 준비합니다.</h2>
             <p>수업 준비, 자료 구성, 반복되는 교육 업무까지. 필요한 범위를 함께 확인하고 적용 가능한 방식부터 제안합니다.</p>
             <div className="home-studio-links">
               {digitalServices.map(({ slug, title, description }) => (
