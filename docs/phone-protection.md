@@ -6,7 +6,7 @@
 - 방문자가 버튼을 눌렀을 때만 Turnstile 로드. 서버 Siteverify 성공, 현재 도메인, reveal-phone 용도, 발급 시각을 검증한 뒤 POST 응답으로 표시.
 - 표시한 값은 브라우저 저장소·쿠키에 보관하지 않고 5분 또는 pagehide 때 제거. 인증 후에만 tel 링크 생성.
 - API 응답은 no-store, CDN no-store, noindex. 인증 토큰·IP·전화번호를 앱 로그에 기록하지 않음.
-- 브라우저 API 요청은 same-origin 자격 증명을 사용해 Vercel Preview 배포 보호를 유지한다. 회원 쿠키를 전화번호 인증 근거로 사용하지 않으며, 외부 제한 서비스에는 쿠키·Authorization을 전달하지 않는다.
+- 브라우저 API 요청은 same-origin 자격 증명을 사용해 Vercel Preview 배포 보호를 유지한다. 같은 호스트의 Vercel 제한 SDK에는 배포 보호용 `_vercel_jwt` 쿠키만 선별 전달한다. 회원 쿠키·Authorization은 전달하지 않으며, 쿠키를 전화번호 공개 인증 근거로 사용하지 않는다.
 - 인증 설정, Vercel 제한 규칙 또는 서비스가 없으면 실패로 처리하고 번호를 반환하지 않음.
 
 ## 무료 도구와 필요한 설정

@@ -1,7 +1,7 @@
 import "server-only";
 import { isIP } from "node:net";
 import { checkRateLimit } from "@vercel/firewall";
-import { phoneConfiguration } from "./handler";
+import { phoneConfiguration, vercelProtectionCookie } from "./handler";
 
 export function phoneConfig() {
   return phoneConfiguration(process.env);
@@ -12,9 +12,11 @@ export async function phoneRateLimit(request: Request) {
   const ip = request.headers.get("x-real-ip");
   if (process.env.VERCEL !== "1" || !ip || !isIP(ip)) throw new Error("unavailable");
   const url = new URL(request.url);
-  // Do not forward user cookies or authorization to the rate-limit service.
+  // The SDK calls this same host. Pass only Vercel's deployment protection cookie,
+  // never membership cookies or Authorization, to keep protected previews usable.
+  const cookie = vercelProtectionCookie(request.headers.get("cookie"));
   const rateRequest = new Request(request.url, {
-    headers: { host: url.host, "x-real-ip": ip },
+    headers: { host: url.host, "x-real-ip": ip, ...(cookie ? { cookie } : {}) },
   });
   return checkRateLimit("edulab-phone-reveal", { request: rateRequest, timeout: 5000 });
 }

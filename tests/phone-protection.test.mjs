@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPhoneHandler, phoneConfiguration } from "../app/phone-protection/handler.ts";
+import { createPhoneHandler, phoneConfiguration, vercelProtectionCookie } from "../app/phone-protection/handler.ts";
+
+test("only a bounded Vercel protection JWT can reach the same-host limiter", () => {
+  assert.equal(vercelProtectionCookie("sb-session=private; _vercel_jwt=header.payload.signature; unrelated=private"), "_vercel_jwt=header.payload.signature");
+  for (const value of [null, "sb-session=private", "fake_vercel_jwt=header.payload.signature", "_vercel_jwt=", "_vercel_jwt=malformed", "_vercel_jwt=header.payload.signature\r\nAuthorization: private", "_vercel_jwt=" + "a".repeat(8192) + ".b.c"]) {
+    assert.equal(vercelProtectionCookie(value), undefined);
+  }
+});
 
 const fakePhone = "010-0000-0000";
 const now = Date.parse("2026-11-27T12:00:00Z");

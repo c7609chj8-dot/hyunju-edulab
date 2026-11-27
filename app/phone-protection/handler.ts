@@ -3,6 +3,12 @@ export type PhoneConfig = {
   secret: string;
   allowedHosts: string[];
 };
+
+export function vercelProtectionCookie(cookies: string | null): string | undefined {
+  const cookie = cookies?.split(";").map(value => value.trim()).find(value => value.startsWith("_vercel_jwt="));
+  if (!cookie || cookie.length > 8192 || !/^_vercel_jwt=[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(cookie)) return;
+  return cookie;
+}
 export function phoneConfiguration(environment: Record<string, string | undefined>): PhoneConfig | null {
   const phone = environment.CONTACT_PHONE_NUMBER?.trim();
   const secret = environment.TURNSTILE_SECRET_KEY?.trim();
