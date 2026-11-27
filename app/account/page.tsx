@@ -1,3 +1,4 @@
+import PhoneReveal from "../phone-reveal";
 import Link from "next/link";
 import { memberAdministrator } from "../auth/access";
 import { logout } from "../auth/actions";
@@ -18,7 +19,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
       {isAdministrator ? <p className="section-action"><Link className="button" href="/admin">관리자 센터</Link></p> : null}
       {params.error === "logout" ? <p role="alert">로그아웃에 실패했습니다. 다시 시도해 주세요.</p> : null}
       <form action={logout} className="section-action"><button className="button" type="submit">로그아웃</button></form>
-      <p className="section-action">회원정보 열람·정정·탈퇴 요청: <a href="tel:01072592558">010-7259-2558</a></p>
+      <p className="section-action">회원정보 열람·정정·탈퇴 요청: <PhoneReveal /></p>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import PhoneReveal from "../../phone-reveal";
 import { redirect } from "next/navigation";
 import { requireVerifiedUser } from "../../auth/access";
 import { logout } from "../../auth/actions";
@@ -29,7 +30,7 @@ export default async function EnrollmentPage() {
         </p>
         <SignupForm enabled={enabled} mode="enroll" />
         <form action={logout} className="section-action"><button className="button" type="submit">다른 계정으로 로그인</button></form>
-        <p className={styles.help}>운영자 문의: <a href="tel:01072592558">010-7259-2558</a></p>
+        <p className={styles.help}>운영자 문의: <PhoneReveal /></p>
       </div>
     </section>
   );
