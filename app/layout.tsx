@@ -4,13 +4,14 @@ import type { ReactNode } from "react";
 import Navigation from "./navigation";
 import InquiryQrCode from "./inquiry-qr-code";
 import { siteLinks } from "./site-links";
-import { productionIndexing, siteName, siteUrl } from "./seo";
+import { productionIndexing, searchVerification, serializeStructuredData, siteUrl, websiteStructuredData } from "./seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "현주에듀랩 | 안전·환경·AI 교육",
-  description: "학교, 교육기관, 기업을 위한 안전·환경·AI 활용 교육",
+  title: "현주에듀랩 | 안전교육·AI 활용교육",
+  description: "학교·교육기관·기업을 위한 안전교육·환경교육·AI 활용교육. 최현주 강사가 현장에 맞는 참여형 교육을 설계합니다.",
+  verification: searchVerification(),
   robots: { index: productionIndexing, follow: true },
   icons: { icon: "/icon.svg" },
 };
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: siteName, url: siteUrl, inLanguage: "ko-KR" }).replace(/</g, "\\u003c") }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(websiteStructuredData()) }} />
         <a className="skip-link" href="#main">본문으로 이동</a>
         <header className="site-header">
           <div className="shell header-inner">

@@ -3,7 +3,7 @@ import { siteLinks } from "./site-links";
 import { programs } from "./programs";
 import { materials } from "./materials/catalog";
 import { portfolioCases } from "./portfolio/cases";
-import { productionIndexing, siteUrl } from "./seo";
+import { canonicalUrl, productionIndexing } from "./seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!productionIndexing) return [];
@@ -14,5 +14,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...materials.map(({ slug }) => `/materials/${slug}`),
     ...portfolioCases.map(({ slug }) => `/portfolio/${slug}`),
   ];
-  return paths.map((path) => ({ url: new URL(path, siteUrl).href }));
+  return [...new Set(paths)].map((path) => ({ url: canonicalUrl(path) }));
 }
