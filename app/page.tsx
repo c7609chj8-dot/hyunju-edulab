@@ -5,7 +5,7 @@ import { programs } from "./programs";
 import { pageMetadata } from "./seo";
 import { teachingApproach } from "./teaching-approach";
 
-export const metadata = pageMetadata("/", "현주에듀랩 | 안전·환경·AI 교육", "학교·교육기관·기업을 위한 안전·환경·AI 활용 교육. 현장에 바로 연결되는 참여형 교육을 설계합니다.");
+export const metadata = pageMetadata("/", "현주에듀랩 | 안전교육·AI 활용교육", "학교안전교육·건설산업안전교육·환경교육·AI 활용교육. 최현주 강사가 학교·교육기관·기업의 현장에 맞는 참여형 교육을 설계합니다.");
 
 const learningPrinciples = [
   "안전·환경·AI를 한 흐름으로 연결",
@@ -33,8 +33,7 @@ export default function Home() {
             <span>오늘의 배움으로 연결합니다.</span>
           </h1>
           <p className="home-hero-copy">
-            안전·환경·AI를 주제로 학교와 교육기관, 기업의 상황에 맞는
-            참여형 교육을 설계합니다.
+            학교·교육기관·기업을 위한 안전교육과 AI 활용교육. 최현주 강사가 대상과 현장에 맞는 참여형 수업을 설계합니다.
           </p>
           <div className="home-hero-actions">
             <Link className="home-primary-button" href="/contact">강의 의뢰하기 <span aria-hidden="true">→</span></Link>

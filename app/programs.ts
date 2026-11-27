@@ -1,6 +1,8 @@
 export const programs = [
   {
     slug: "industrial-safety",
+    searchTitle: "건설·산업안전교육 | 현주에듀랩",
+    searchDescription: "기업·현장 작업자와 안전교육 담당자를 위한 건설·산업안전교육입니다. 작업 현장의 위험요인을 찾고 예방 행동을 참여 활동으로 익힙니다.",
     name: "건설·산업안전",
     detail: "작업 현장의 위험요인을 찾고 예방 방법을 익힙니다.",
     audience: "기업·현장 작업자 및 안전교육 담당자",
@@ -13,6 +15,8 @@ export const programs = [
   },
   {
     slug: "school-safety",
+    searchTitle: "학교안전교육·7대 안전교육 | 현주에듀랩",
+    searchDescription: "학교 교육 대상에 맞춘 7대 안전교육입니다. 생활·교통·재난 등 학교안전 주제를 퀴즈·역할극·체험으로 배우는 참여형 안전교육을 안내합니다.",
     name: "학교안전",
     detail: "생활·교통·폭력예방 및 신변보호·약물 및 사이버중독 예방·재난·직업·응급처치의 7대 안전교육을 대상에 맞춘 참여 활동으로 진행합니다.",
     audience: "유,초,중,고,특수,영재학교 및 학교 교육 담당자",
@@ -25,6 +29,8 @@ export const programs = [
   },
   {
     slug: "environment",
+    searchTitle: "탄소중립·자원순환 환경교육 | 현주에듀랩",
+    searchDescription: "초등학생과 환경교육 담당자를 위한 탄소중립·자원순환 환경교육입니다. 생활 속 사례와 참여 활동으로 학교와 가정에서 실천할 행동을 정리합니다.",
     name: "환경교육",
     detail: "탄소중립과 자원순환을 생활 속 실천으로 연결합니다.",
     audience: "초등학생 및 환경교육 담당자",
@@ -37,6 +43,8 @@ export const programs = [
   },
   {
     slug: "ai",
+    searchTitle: "AI 활용교육·생성형 AI 실습 | 현주에듀랩",
+    searchDescription: "강사·교육 담당자·입문자를 위한 AI 활용교육입니다. 생성형 AI로 수업 활동지와 업무 문서 초안을 만들고 정확성과 개인정보를 점검하는 방법을 실습합니다.",
     name: "AI 활용교육",
     detail: "수업 준비와 일상 업무에 적용할 수 있는 AI 활용법을 실습합니다.",
     audience: "강사·교육 담당자 및 AI 활용 입문자",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { programs } from "../../programs";
-import { pageMetadata } from "../../seo";
+import { breadcrumbStructuredData, pageMetadata, serializeStructuredData } from "../../seo";
 
 type ProgramPageProps = { params: Promise<{ slug: string }> };
 
@@ -16,8 +16,7 @@ export async function generateMetadata({ params }: ProgramPageProps): Promise<Me
   const { slug } = await params;
   const program = programs.find((item) => item.slug === slug);
   if (!program) notFound();
-  const title = program.name.endsWith("교육") ? program.name : `${program.name} 교육`;
-  return pageMetadata(`/education/${program.slug}`, `${title} | 현주에듀랩`, `${program.audience}를 위한 교육입니다. ${program.detail}`);
+  return pageMetadata(`/education/${program.slug}`, program.searchTitle, program.searchDescription);
 }
 
 export default async function ProgramPage({ params }: ProgramPageProps) {
@@ -27,10 +26,11 @@ export default async function ProgramPage({ params }: ProgramPageProps) {
 
   return (
     <article className="shell section content-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(breadcrumbStructuredData([{ name: "홈", path: "/" }, { name: "교육 프로그램", path: "/education" }, { name: program.name, path: `/education/${program.slug}` }])) }} />
       <Link className="program-link inline-flex min-h-11 items-center" href={`/education#${program.slug}`}>교육 프로그램 목록으로</Link>
       <p className="eyebrow section-action">PROGRAM</p>
       <h1>{program.name}</h1>
-      <p className="page-lead">{program.detail}</p>
+      <p className="page-lead">{program.searchDescription}</p>
       <p className="program-audience">{program.audience}</p>
       <p className="materials-note">아래는 교육 구성 예시입니다. 교육 시간·차시·인원·비용과 제공 자료는 대상과 기관의 여건에 맞춰 사전 협의합니다.</p>
       <div className="about-actions section-action">

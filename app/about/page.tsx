@@ -1,11 +1,11 @@
-import { pageMetadata } from "../seo";
+import { instructorStructuredData, pageMetadata, serializeStructuredData } from "../seo";
 import Link from "next/link";
 import Image from "next/image";
 import { programs } from "../programs";
 import { teachingApproach } from "../teaching-approach";
 import FieldGallery from "./field-gallery";
 
-export const metadata = pageMetadata("/about", "최현주 강사 소개 | 현주에듀랩", "최현주 강사의 안전교육 운영 경력과 AI·산업안전 관련 자격, 실습 중심 교육 방식을 소개합니다.");
+export const metadata = pageMetadata("/about", "최현주 안전교육·AI 활용교육 강사 | 현주에듀랩", "최현주 강사의 안전교육 운영 경력과 AI·산업안전 관련 자격, 실습 중심 교육 방식을 소개합니다.");
 
 const experience = [
   {
@@ -44,7 +44,8 @@ export default function AboutPage() {
       <div className="about-intro">
         <div>
           <p className="eyebrow">INSTRUCTOR</p>
-          <h1>강사 소개</h1>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(instructorStructuredData()) }} />
+          <h1>안전교육·AI 활용교육 강사 소개</h1>
           <p className="instructor-name">최현주</p>
           <p className="instructor-role">㈜한국안전교육 대표이사 · AI 활용지도사 1급</p>
           <p className="page-lead">
