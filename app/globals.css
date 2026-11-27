@@ -105,6 +105,15 @@ h2 { color: var(--color-navy); font-size: clamp(1.6rem, 3vw, 2.25rem); line-heig
 .program-faq summary { min-height: 44px; color: var(--color-navy); font-weight: 700; cursor: pointer; }
 .program-faq details p { margin-top: .5rem; }
 .section-action { margin-top: 1.5rem; }
+.contact-callout { max-width: 38rem; margin-top: 1.5rem; padding: clamp(1.25rem, 4vw, 2rem); border: 1px solid #28504e; border-radius: 1rem; background: #0b242e; color: #edf7f4; }
+.contact-callout h2 { margin-bottom: .5rem; color: white; font-size: 1.35rem; font-weight: 800; }
+.contact-phone-link { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .25rem 1rem; width: fit-content; max-width: 100%; min-height: 48px; margin-block: 1.25rem; padding: .75rem 1.15rem; border-radius: .75rem; background: #dffec6; color: #071823; font-weight: 800; }
+.contact-phone-link strong { font-size: clamp(1.1rem, 4.8vw, 1.5rem); white-space: nowrap; }
+.contact-phone-link:hover { background: white; }
+.contact-callout .contact-callout-note { color: #c2d4d9; font-size: .9rem; }
+.contact-example { max-width: 38rem; margin-top: 2rem; }
+.contact-example summary { display: list-item; min-height: 44px; padding-block: .65rem; color: var(--color-teal); font-weight: 700; cursor: pointer; }
+.contact-example[open] summary { margin-bottom: .5rem; }
 .contact-preview, .contact-form { max-width: 38rem; }
 .contact-preview { padding: .85rem 1rem; border-radius: .5rem; background: var(--color-surface); }
 .contact-form { display: grid; gap: .5rem; margin-top: 1.5rem; }
