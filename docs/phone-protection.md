@@ -6,6 +6,7 @@
 - 방문자가 버튼을 눌렀을 때만 Turnstile 로드. 서버 Siteverify 성공, 현재 도메인, reveal-phone 용도, 발급 시각을 검증한 뒤 POST 응답으로 표시.
 - 표시한 값은 브라우저 저장소·쿠키에 보관하지 않고 5분 또는 pagehide 때 제거. 인증 후에만 tel 링크 생성.
 - API 응답은 no-store, CDN no-store, noindex. 인증 토큰·IP·전화번호를 앱 로그에 기록하지 않음.
+- 브라우저 API 요청은 same-origin 자격 증명을 사용해 Vercel Preview 배포 보호를 유지한다. 회원 쿠키를 전화번호 인증 근거로 사용하지 않으며, 외부 제한 서비스에는 쿠키·Authorization을 전달하지 않는다.
 - 인증 설정, Vercel 제한 규칙 또는 서비스가 없으면 실패로 처리하고 번호를 반환하지 않음.
 
 ## 무료 도구와 필요한 설정
@@ -14,7 +15,7 @@ Cloudflare Turnstile Free와 기존 Vercel Hobby의 무료 제한 범위를 우�
 
 1. Cloudflare 대시보드에서 Turnstile Free 위젯을 만든다.
    - Managed 방식, 도메인 hyunjulab.com만 허용.
-   - 테스트와 Preview는 별도 위젯과 정확한 호스트명을 사용한다. 모든 vercel.app 호스트를 포괄적으로 허용하지 않는다.
+   - Preview는 정확한 호스트명만 추가한다. 운영과 분리한 별도 위젯이 권장되며, 같은 위젯을 쓸 때에도 서버의 환경별 호스트 검증을 유지한다. 모든 vercel.app 호스트를 포괄적으로 허용하지 않는다.
    - site key는 공개값이고 secret key는 서버 비밀값이다. 키를 채팅·GitHub·스크린샷에 올리지 않는다.
 2. Vercel 기존 프로젝트 hyunju-edulab의 해당 환경에만 다음을 저장한다.
    - CONTACT_PHONE_NUMBER: 실제 연락처. Secret 유형. NEXT_PUBLIC_ 사용 금지.

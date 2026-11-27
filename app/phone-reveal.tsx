@@ -71,7 +71,7 @@ export default function PhoneReveal({ variant = "inline" }: { variant?: "hero" |
         try {
           const response = await fetch("/api/contact-phone", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }), cache: "no-store", credentials: "omit",
+            body: JSON.stringify({ token }), cache: "no-store", credentials: "same-origin",
             signal: controller.signal,
           });
           if (!response.ok) {
