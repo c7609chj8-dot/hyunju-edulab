@@ -64,7 +64,8 @@ export default function HeroGallery() {
       <div className="hero-gallery-stage">
         {photos.map((photo, index) => (
           <div className="hero-gallery-slide" data-active={active === index} aria-hidden={active !== index} key={photo.src}>
-            <Image className="hero-gallery-photo" src={photo.src} alt={photo.alt} fill sizes="(min-width: 960px) 60vw, 100vw" preload={index === 0} />
+            <Image className="hero-gallery-ambient" src={photo.src} alt="" aria-hidden="true" fill sizes="100vw" />
+            <Image className="hero-gallery-photo" src={photo.src} alt={photo.alt} fill sizes="100vw" preload={index === 0} />
           </div>
         ))}
         <span className="hero-gallery-label" aria-hidden="true">FIELD NOTES / HYUNJU EDU LAB</span>
