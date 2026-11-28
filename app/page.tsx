@@ -5,6 +5,7 @@ import { programs } from "./programs";
 import { pageMetadata } from "./seo";
 import { teachingApproach } from "./teaching-approach";
 import { siteContact } from "./site-contact";
+import HeroGallery from "./hero-gallery";
 
 export const metadata = pageMetadata("/", "현주에듀랩 | 안전교육·AI 활용교육", "학교안전교육·건설산업안전교육·환경교육·AI 활용교육. 최현주 강사가 학교·교육기관·기업의 현장에 맞는 참여형 교육을 설계합니다.");
 
@@ -18,16 +19,8 @@ export default function Home() {
   return (
     <div className="home-page">
       <section className="home-hero" aria-labelledby="hero-title">
-        <Image
-          className="home-hero-image"
-          src="/images/school-safety-class.jpg"
-          alt="교실에서 학생들과 함께 진행하는 안전교육 현장"
-          fill
-          preload
-          sizes="100vw"
-        />
-        <div className="home-hero-scrim" />
-        <div className="shell home-hero-content">
+        <div className="shell home-hero-layout">
+        <div className="home-hero-content">
           <p className="home-kicker">HYUNJU EDU LAB · FIELD LEARNING</p>
           <h1 id="hero-title">
             현장의 질문을,
@@ -43,6 +36,8 @@ export default function Home() {
             <Link className="home-text-link" href="/signup">회원가입 <span aria-hidden="true">→</span></Link>
           </div>
           <p className="home-hero-caption">현장의 경험을 AI로 연결하고, 교육의 가치를 미래로 확장합니다.</p>
+        </div>
+        <HeroGallery />
         </div>
       </section>
 
