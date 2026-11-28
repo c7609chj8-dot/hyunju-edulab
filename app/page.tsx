@@ -106,7 +106,7 @@ export default function Home() {
         <div className="shell home-studio-grid">
           <figure className="home-studio-image">
             <Image
-              src="/images/ai-workshop.jpg"
+              src="/images/ai-workshop-privacy-v1.jpg"
               alt="참여자들이 노트북으로 실습하는 AI 활용교육 현장"
               fill
               sizes="(min-width: 960px) 50vw, 100vw"

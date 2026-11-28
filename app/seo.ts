@@ -6,7 +6,7 @@ export const productionIndexing = process.env.VERCEL_ENV === "production" || (!p
 
 export function pageMetadata(path: string, title: string, description: string, indexable = true): Metadata {
   const url = canonicalUrl(path);
-  const image = { url: `${siteUrl}/images/school-safety-class.jpg`, width: 4032, height: 3024, alt: "학생들과 함께하는 현주에듀랩 안전교육 현장" };
+  const image = { url: `${siteUrl}/images/school-safety-class-privacy-v1.jpg`, width: 1448, height: 1086, alt: "학생들과 함께하는 현주에듀랩 안전교육 현장" };
   return {
     title,
     description,

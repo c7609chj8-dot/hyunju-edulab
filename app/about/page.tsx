@@ -59,7 +59,7 @@ export default function AboutPage() {
         </div>
         <figure className="about-photo">
           <Image
-            src="/images/school-safety-class.jpg"
+            src="/images/school-safety-class-privacy-v1.jpg"
             alt="교실에서 학생들과 안전 상황을 살펴보는 교육 현장"
             fill
             sizes="(min-width: 896px) 550px, 90vw"

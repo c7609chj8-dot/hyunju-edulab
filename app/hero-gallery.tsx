@@ -4,8 +4,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 const photos = [
-  { src: "/images/school-safety-class.jpg", title: "함께 배우는 학교안전", alt: "교실에서 학생들과 함께 진행하는 안전교육 현장", detail: "현장의 상황을 살펴보고 안전한 행동을 익히는 시간" },
-  { src: "/images/ai-workshop.jpg", title: "직접 익히는 AI 활용", alt: "참여자들이 노트북으로 실습하는 AI 활용교육 현장", detail: "직접 실습하며 수업과 업무에 적용하는 배움" },
+  { src: "/images/school-safety-class-privacy-v1.jpg", title: "함께 배우는 학교안전", alt: "교실에서 학생들과 함께 진행하는 안전교육 현장", detail: "현장의 상황을 살펴보고 안전한 행동을 익히는 시간" },
+  { src: "/images/ai-workshop-privacy-v1.jpg", title: "직접 익히는 AI 활용", alt: "참여자들이 노트북으로 실습하는 AI 활용교육 현장", detail: "직접 실습하며 수업과 업무에 적용하는 배움" },
+  { src: "/images/hero-fire-safety-privacy-v1.jpg", title: "소화기 사용 실습", alt: "운동장에서 참여자들이 지켜보는 가운데 소화기 사용을 실습하는 모습", detail: "직접 연습하며 익히는 소방안전" },
+  { src: "/images/hero-school-session-privacy-v1.jpg", title: "학교 단체교육", alt: "체육관에 모인 학생들이 무대의 교육 화면을 함께 살펴보는 모습", detail: "함께 듣고 배우는 학교 교육 현장" },
+  { src: "/images/hero-workplace-safety-privacy-v1.jpg", title: "건설업 안전보건교육", alt: "안전모를 준비한 참여자들이 교실에서 건설업 안전보건교육을 듣는 모습", detail: "작업 현장과 연결하는 안전교육" },
+  { src: "/images/hero-media-practice-privacy-v1.jpg", title: "디지털 장비 활용", alt: "컴퓨터와 방송 장비를 함께 살펴보는 참여자들의 모습", detail: "디지털 장비를 함께 살펴보는 시간" },
 ];
 
 function subscribeMotion(change: () => void) {

@@ -10,7 +10,7 @@ test("canonical and social URLs use the primary domain without query or fragment
   const metadata = pageMetadata("/education/ai", "AI 활용교육", "교육 소개");
   assert.equal(metadata.alternates.canonical, "https://hyunjulab.com/education/ai");
   assert.equal(metadata.openGraph.url, metadata.alternates.canonical);
-  assert.equal(metadata.twitter.images[0], "https://hyunjulab.com/images/school-safety-class.jpg");
+  assert.equal(metadata.twitter.images[0], "https://hyunjulab.com/images/school-safety-class-privacy-v1.jpg");
 });
 
 test("verification metadata is optional and uses actual provided tokens", () => {
