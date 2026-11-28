@@ -37,7 +37,7 @@ export default function Home() {
             학교·교육기관·기업을 위한 안전교육과 AI 활용교육. 최현주 강사가 대상과 현장에 맞는 참여형 수업을 설계합니다.
           </p>
           <div className="home-hero-actions">
-            <a className="home-primary-button" href={siteContact.phoneHref}>전화 문의 {siteContact.phone} <span aria-hidden="true">→</span></a>
+            <a className="home-primary-button" href={siteContact.phoneHref}>전화 상담 <span aria-hidden="true">→</span></a>
             <Link className="home-text-link" href="/contact">강의 문의 안내 <span aria-hidden="true">→</span></Link>
             <Link className="home-text-link" href="/education">교육 프로그램 보기 <span aria-hidden="true">↗</span></Link>
             <Link className="home-text-link" href="/signup">회원가입 <span aria-hidden="true">→</span></Link>
@@ -163,7 +163,7 @@ export default function Home() {
           <p className="home-kicker">LET&apos;S TALK</p>
           <h2 id="contact-cta-title">다음 교육의 시작을<br />함께 준비해 보세요.</h2>
           <p>교육 대상과 주제, 희망 일정을 전화로 알려주세요. 수업 방식과 준비 사항을 함께 살펴보겠습니다.</p>
-          <a className="home-primary-button" href={siteContact.phoneHref}>전화 문의 {siteContact.phone} <span aria-hidden="true">→</span></a>
+          <a className="home-primary-button" href={siteContact.phoneHref}>전화 상담 <span aria-hidden="true">→</span></a>
         </div>
       </section>
     </div>
