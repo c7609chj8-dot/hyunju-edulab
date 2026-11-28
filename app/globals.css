@@ -220,7 +220,7 @@ body { color: #142230; background: #f7f8f4; }
 .home-hero :focus-visible { outline-color: #dffec6; }
 @media (min-width: 60rem) {
   .home-hero-layout { display: block; width: 100%; min-height: max(48rem, calc(100svh - 5rem)); }
-  .home-hero-content { display: flex; flex-direction: column; justify-content: center; min-height: inherit; padding-block: 5rem 15rem; pointer-events: none; }
+  .home-hero-content { display: flex; flex-direction: column; justify-content: center; min-height: inherit; padding-block: 5rem 18rem; pointer-events: none; }
   .home-hero-content a { pointer-events: auto; }
   .home-hero h1 { max-width: 47rem; font-size: clamp(3rem, 4.7vw, 5rem); text-shadow: 0 2px 20px #0005; }
   .home-hero-copy { max-width: 36rem; text-shadow: 0 1px 10px #000a; }
@@ -229,9 +229,9 @@ body { color: #142230; background: #f7f8f4; }
   .hero-gallery-stage { position: absolute; inset: 0; aspect-ratio: auto; }
   .hero-gallery-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #03121be0 0%, #03121b80 36%, #03121b00 76%), linear-gradient(0deg, #03121bf5, transparent 42%); }
   .hero-gallery-label { display: none; }
-  .hero-gallery-footer { position: absolute; inset: auto 0 5.5rem; width: min(72rem, calc(100% - 6rem)); margin-inline: auto; padding: 0; }
+  .hero-gallery-footer { position: absolute; inset: auto 0 10.5rem; width: min(72rem, calc(100% - 6rem)); margin-inline: auto; padding: 0; }
   .hero-gallery-caption { flex: 0 1 32rem; }
-  .hero-gallery-tabs { position: absolute; inset: auto 0 1.5rem; width: min(72rem, calc(100% - 6rem)); margin-inline: auto; padding: 0; grid-template-columns: repeat(2, minmax(0, 14rem)); }
+  .hero-gallery-tabs { position: absolute; inset: auto 0 1.5rem; width: min(72rem, calc(100% - 6rem)); margin-inline: auto; padding: 0; grid-template-columns: repeat(3, minmax(0, 14rem)); }
   .hero-gallery-tabs button { background: #071b25b3; }
 }
 @media (prefers-reduced-motion: reduce) {
